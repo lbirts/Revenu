@@ -26,7 +26,10 @@ export function BoneTheme({ children }: { children: React.ReactNode }) {
 
 export default function HomeSkeleton() {
   return (
-    <div className="flex grow flex-col gap-6 bg-panel-2 p-20">
+    <div
+      data-testid="home-skeleton"
+      className="flex grow flex-col gap-6 bg-panel-2 p-20"
+    >
       {/* header bones */}
       <div className="flex h-15 flex-col gap-3">
         <Skeleton width={370} height={23} />
@@ -96,7 +99,10 @@ export default function HomeSkeleton() {
 
 export function SidebarSkeleton() {
   return (
-    <div className="flex w-70 shrink-0 flex-col bg-panel-2">
+    <div
+      data-testid="sidebar-skeleton"
+      className="flex w-70 shrink-0 flex-col bg-panel-2"
+    >
       <div className="mt-6 flex h-12 items-center px-6">
         <Skeleton circle width={48} height={48} />
       </div>

@@ -1,0 +1,148 @@
+{
+  "name": "revenu",
+  "framework": "react-vite",
+
+  "installCommand": "npm install",
+  "buildCommand": "npm run build",
+  "serveCommand": "npm run preview -- --port 4173",
+
+  "readyHeuristic": {
+    "url": "http://127.0.0.1:4173/",
+    "waitFor": "networkidle",
+    "timeoutMs": 30000,
+  },
+  "routes": [
+    {
+      "name": "overview",
+      "url": "/",
+      "states": [
+        {
+          "name": "default",
+          "setup": [{ "waitForSelector": "[data-testid='page-title']" }],
+        },
+        {
+          "name": "loading",
+          "setup": [{ "queryParam": "skeleton", "value": "1" }],
+          "animation": { "trigger": [], "at": [400, 900] },
+        },
+        {
+          "name": "timeline-open",
+          "setup": [
+            { "waitForSelector": "[data-testid='page-title']" },
+            { "click": "[data-testid='edit-timeline-btn']" },
+            { "waitForSelector": "[data-testid='date-picker']" },
+            { "waitMs": 250 },
+          ],
+        },
+        {
+          "name": "sidebar-collapsed",
+          "setup": [
+            { "waitForSelector": "[data-testid='page-title']" },
+            { "click": "[data-testid='sidebar-toggle']" },
+            { "waitMs": 600 },
+          ],
+        },
+        {
+          "name": "edit-timeline-focused",
+          "setup": [
+            { "waitForSelector": "[data-testid='page-title']" },
+            { "focus": "[data-testid='edit-timeline-btn']" },
+          ],
+        },
+        {
+          "name": "nav-hover-anim",
+          "setup": [{ "waitForSelector": "[data-testid='page-title']" }],
+          "animation": {
+            "trigger": [{ "hover": "[data-testid='nav-link-reports']" }],
+            "at": [150, 400],
+          },
+        },
+      ],
+      "viewports": [
+        { "name": "desktop", "width": 1440, "height": 900 },
+        { "name": "laptop", "width": 1280, "height": 800 },
+      ],
+    },
+
+    {
+      "name": "revenue-trend",
+      "url": "/revenue-trend",
+      "states": [
+        {
+          "name": "default",
+          "setup": [{ "waitForSelector": "[data-testid='page-title']" }],
+        },
+        {
+          "name": "breakdown-scrolled",
+          "setup": [{ "waitForSelector": "[data-testid='page-title']" }, { "scrollTo": { "y": 800 } }],
+        },
+      ],
+      "viewports": [
+        { "name": "desktop", "width": 1440, "height": 900 },
+        { "name": "laptop", "width": 1280, "height": 800 },
+      ],
+    },
+
+    {
+      "name": "reports",
+      "url": "/reports",
+      "states": [
+        {
+          "name": "default",
+          "setup": [{ "waitForSelector": "[data-testid='page-title']" }],
+        },
+        {
+          "name": "filter-financial",
+          "setup": [
+            { "waitForSelector": "[data-testid='page-title']" },
+            { "click": "[data-testid='report-filter-financial']" },
+            { "waitForSelector": "[data-testid='report-row-rpt-006']" },
+            { "waitMs": 400 },
+          ],
+        },
+      ],
+      "viewports": [
+        { "name": "desktop", "width": 1440, "height": 900 },
+        { "name": "laptop", "width": 1280, "height": 800 },
+      ],
+    },
+
+    {
+      "name": "settings",
+      "url": "/settings",
+      "states": [
+        {
+          "name": "default",
+          "setup": [{ "waitForSelector": "[data-testid='page-title']" }],
+        },
+        {
+          "name": "form-dirty",
+          "setup": [
+            { "waitForSelector": "[data-testid='page-title']" },
+            {
+              "fill": {
+                "selector": "[data-testid='field-name-input']",
+                "value": "Rachel Zane",
+              },
+            },
+          ],
+        },
+        {
+          "name": "timezone-open",
+          "setup": [
+            { "waitForSelector": "[data-testid='page-title']" },
+            { "click": "[data-testid='field-time-zone-trigger']" },
+            { "waitForSelector": "[data-testid='field-time-zone-options']" },
+            { "waitMs": 250 },
+          ],
+        },
+      ],
+      "viewports": [
+        { "name": "desktop", "width": 1440, "height": 900 },
+        { "name": "laptop", "width": 1280, "height": 800 },
+      ],
+    },
+  ],
+
+  "fixedClock": null,
+}

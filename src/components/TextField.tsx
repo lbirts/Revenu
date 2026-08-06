@@ -5,6 +5,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { slug } from "@/lib/utils";
 
 const fieldBase = [
   "h-14 w-full rounded-lg border-2 border-input-border bg-transparent px-4",
@@ -24,11 +25,21 @@ export function TextField({
   placeholder?: string;
   onChange: (v: string) => void;
 }) {
+  const id = slug(label);
   return (
-    <label className="flex grow basis-0 flex-col gap-2">
-      <span className="text-base leading-none text-ink">{label}</span>
+    <label
+      data-testid={`field-${id}`}
+      className="flex grow basis-0 flex-col gap-2"
+    >
+      <span
+        data-testid={`field-${id}-label`}
+        className="text-base leading-none text-ink"
+      >
+        {label}
+      </span>
       <input
         type="text"
+        data-testid={`field-${id}-input`}
         value={value}
         placeholder={placeholder}
         onChange={(e) => onChange(e.target.value)}
@@ -50,16 +61,24 @@ export function SelectField({
   options: string[];
   onChange: (v: string) => void;
 }) {
+  const id = slug(label);
   return (
-    <div className="flex grow basis-0 flex-col gap-2">
-      <span className="text-base leading-none text-ink">{label}</span>
+    <div data-testid={`field-${id}`} className="flex grow basis-0 flex-col gap-2">
+      <span
+        data-testid={`field-${id}-label`}
+        className="text-base leading-none text-ink"
+      >
+        {label}
+      </span>
       <Select value={value} onValueChange={(v) => onChange(v as string)}>
         <SelectTrigger
+          data-testid={`field-${id}-trigger`}
           className={`${fieldBase} cursor-pointer justify-between text-muted focus-visible:border-ink focus-visible:ring-0 data-[size=default]:h-14 [&_svg:not([class*='size-'])]:text-muted`}
         >
           <SelectValue />
         </SelectTrigger>
         <SelectContent
+          data-testid={`field-${id}-options`}
           alignItemWithTrigger={false}
           className="border border-hairline bg-panel-2 py-1 ring-0"
         >

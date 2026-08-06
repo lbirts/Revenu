@@ -1,3 +1,4 @@
+import { slug } from "@/lib/utils";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
@@ -21,6 +22,8 @@ export default function Sidebar() {
 
   return (
     <aside
+      data-testid="sidebar"
+      data-collapsed={collapsed}
       className={`relative z-10 flex shrink-0 flex-col bg-panel transition-[width] duration-300 ease-(--ease-app) ${
         collapsed ? "w-22" : "w-70"
       }`}
@@ -29,7 +32,10 @@ export default function Sidebar() {
         className={`mt-6 flex h-12 items-center px-6 ${collapsed ? "justify-center" : "justify-between"}`}
       >
         {!collapsed && (
-          <div className="h-12 w-12 overflow-hidden rounded-full bg-white">
+          <div
+            data-testid="sidebar-logo"
+            className="h-12 w-12 overflow-hidden rounded-full bg-white"
+          >
             <img
               src={logo}
               alt="Revenu logo"
@@ -40,6 +46,7 @@ export default function Sidebar() {
         <button
           type="button"
           onClick={() => setCollapsed((c) => !c)}
+          data-testid="sidebar-toggle"
           aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
           className="flex h-11 w-11 cursor-pointer items-center justify-center text-muted transition-colors duration-300 ease-(--ease-app) hover:text-ink"
         >
@@ -49,11 +56,12 @@ export default function Sidebar() {
         </button>
       </div>
 
-      <nav className="mt-11 flex flex-col gap-6">
+      <nav data-testid="sidebar-nav" className="mt-11 flex flex-col gap-6">
         {items.map(({ to, label, Icon }) => (
           <NavLink
             key={to}
             to={to}
+            data-testid={`nav-link-${slug(label)}`}
             className={({ isActive }) =>
               [
                 "flex items-center gap-2 overflow-hidden whitespace-nowrap px-8 transition-colors duration-300 ease-(--ease-app)",
@@ -65,7 +73,12 @@ export default function Sidebar() {
           >
             <Icon className="shrink-0" />
             {!collapsed && (
-              <span className="text-sm font-medium leading-none">{label}</span>
+              <span
+                data-testid={`nav-label-${slug(label)}`}
+                className="text-sm font-medium leading-none"
+              >
+                {label}
+              </span>
             )}
           </NavLink>
         ))}

@@ -1,5 +1,6 @@
 import { Calendar } from "@/components/ui/calendar";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { slug } from "@/lib/utils";
 import { useState } from "react";
 import type { DateRange } from "react-day-picker";
 import { CloseIcon } from "../icons";
@@ -30,6 +31,7 @@ export default function DatePickerModal({
   return (
     <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
       <DialogContent
+        data-testid="date-picker"
         showCloseButton={false}
         overlayClassName="z-40 bg-[rgba(30,32,31,0.7)] backdrop-blur-[20px] supports-backdrop-filter:backdrop-blur-[20px]"
         className="top-38.5 right-20 left-auto z-50 flex h-174 max-h-[calc(100vh-174px)] w-90 max-w-none translate-x-0 translate-y-0 flex-col gap-0 rounded-lg border border-accent-hairline bg-panel-2 p-0 ring-0 sm:max-w-none"
@@ -41,6 +43,7 @@ export default function DatePickerModal({
           <button
             type="button"
             onClick={onClose}
+            data-testid="date-picker-close"
             aria-label="Close"
             className="flex h-12 w-12 cursor-pointer items-center justify-center text-muted-2 transition-colors duration-300 ease-(--ease-app) hover:text-ink"
           >
@@ -52,7 +55,12 @@ export default function DatePickerModal({
           <p className="text-sm font-medium leading-5 tracking-[0.1px] text-muted-2">
             Depart - Return dates
           </p>
-          <p className="mt-2 text-[22px] leading-7 text-muted-2">{label}</p>
+          <p
+            data-testid="date-picker-range"
+            className="mt-2 text-[22px] leading-7 text-muted-2"
+          >
+            {label}
+          </p>
         </div>
         <div className="mt-3 border-b border-m3-divider" />
 
@@ -144,6 +152,7 @@ function TextBtn({
     <button
       type="button"
       onClick={onClick}
+      data-testid={`date-picker-${slug(children)}`}
       className="h-12 cursor-pointer rounded-full px-3 text-sm font-medium text-accent transition-colors duration-300 ease-(--ease-app) hover:bg-accent/10"
     >
       {children}

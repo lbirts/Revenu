@@ -46,8 +46,11 @@ export function monthTick(labelY: number) {
 
 export function Pill({ text }: { text: string }) {
   return (
-    <div className="pointer-events-none">
-      <div className="flex h-7 items-center rounded-lg border border-white bg-accent-press px-2 text-xs font-medium text-ink shadow-[4px_4px_16px_rgba(26,32,44,0.08)]">
+    <div data-testid="chart-tooltip" className="pointer-events-none">
+      <div
+        data-testid="chart-tooltip-body"
+        className="flex h-7 items-center rounded-lg border border-white bg-accent-press px-2 text-xs font-medium text-ink shadow-[4px_4px_16px_rgba(26,32,44,0.08)]"
+      >
         {text}
       </div>
       <div className="mx-auto -mt-1.25 h-2.5 w-2.5 rotate-45 border-b border-r border-white bg-accent-press" />

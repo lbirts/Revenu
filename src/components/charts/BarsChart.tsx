@@ -53,11 +53,16 @@ export default function BarsChart() {
   return (
     <div
       ref={wrapRef}
+      data-testid="rev-exp-chart-wrap"
       className="relative h-full w-full"
       onMouseMove={onMove}
       onMouseLeave={() => setTip(null)}
     >
-      <ChartContainer config={config} className="h-full w-full aspect-auto!">
+      <ChartContainer
+        config={config}
+        data-testid="rev-exp-chart"
+        className="h-full w-full aspect-auto!"
+      >
         <BarChart data={revExpBars} margin={PLOT_MARGIN}>
           <CartesianGrid stroke={HAIRLINE} />
           <YAxis

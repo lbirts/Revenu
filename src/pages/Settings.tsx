@@ -10,7 +10,10 @@ import { defaultNotifications, timezones } from "../data";
 const showSavedToast = () =>
   toast.custom(
     () => (
-      <div className="flex h-16.75 w-110.5 items-center justify-center rounded-lg bg-toast text-base font-semibold text-ink">
+      <div
+        data-testid="saved-toast"
+        className="flex h-16.75 w-110.5 items-center justify-center rounded-lg bg-toast text-base font-semibold text-ink"
+      >
         Your changes have been successfully saved
       </div>
     ),
@@ -54,9 +57,14 @@ export default function Settings() {
         subtitle="Manage your personal information and preferences"
       />
 
-      <div className="rounded-lg bg-panel px-5.5 py-6">
-        <h3 className="text-2xl font-semibold leading-7 text-ink">Profile</h3>
-        <div className="mt-6 flex flex-col gap-6">
+      <div data-testid="profile-card" className="rounded-lg bg-panel px-5.5 py-6">
+        <h3
+          data-testid="profile-card-title"
+          className="text-2xl font-semibold leading-7 text-ink"
+        >
+          Profile
+        </h3>
+        <div data-testid="profile-fields" className="mt-6 flex flex-col gap-6">
           <div className="flex gap-6">
             <TextField
               label="Name"
@@ -86,14 +94,21 @@ export default function Settings() {
         </div>
       </div>
 
-      <div className="rounded-lg bg-panel px-5.5 py-6">
-        <h3 className="text-2xl font-semibold leading-7 text-ink">
+      <div
+        data-testid="notifications-card"
+        className="rounded-lg bg-panel px-5.5 py-6"
+      >
+        <h3
+          data-testid="notifications-card-title"
+          className="text-2xl font-semibold leading-7 text-ink"
+        >
           Notifications
         </h3>
-        <div className="mt-6 flex flex-col">
+        <div data-testid="notification-rows" className="mt-6 flex flex-col">
           {defaultNotifications.map((n, i) => (
             <div
               key={n.key}
+              data-testid={`notification-row-${n.key}`}
               className={`flex h-13.5 items-center justify-between ${
                 i < defaultNotifications.length - 1
                   ? "border-b border-input-border"
@@ -102,6 +117,7 @@ export default function Settings() {
             >
               <span className="text-base leading-none text-ink">{n.label}</span>
               <Toggle
+                testId={`notification-toggle-${n.key}`}
                 on={form.notifs[i]}
                 onChange={(v) =>
                   set(
@@ -115,7 +131,12 @@ export default function Settings() {
         </div>
       </div>
 
-      <GlowButton disabled={!dirty} onClick={save} className="self-start">
+      <GlowButton
+        testId="save-changes-btn"
+        disabled={!dirty}
+        onClick={save}
+        className="self-start"
+      >
         Save changes
       </GlowButton>
     </Page>

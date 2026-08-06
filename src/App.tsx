@@ -49,7 +49,10 @@ export default function App() {
   return (
     <div className="flex h-screen overflow-hidden">
       <Sidebar />
-      <main className="relative min-w-0 flex-1 overflow-auto bg-bg">
+      <main
+        data-testid="main"
+        className="relative min-w-0 flex-1 overflow-auto bg-bg"
+      >
         <Routes>
           <Route path="/" element={<Home onEditTimeline={openPicker} />} />
           <Route

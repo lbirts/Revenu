@@ -80,7 +80,11 @@ function PillTip({
 
 export default function TrendChart() {
   return (
-    <ChartContainer config={config} className="h-full w-full aspect-auto!">
+    <ChartContainer
+      config={config}
+      data-testid="trend-chart"
+      className="h-full w-full aspect-auto!"
+    >
       <AreaChart data={trendPoints} margin={PLOT_MARGIN}>
         <defs>
           <linearGradient id="trendFill" x1="0" y1="0" x2="0" y2="1">

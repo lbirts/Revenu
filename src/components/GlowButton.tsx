@@ -6,18 +6,21 @@ export default function GlowButton({
   disabled = false,
   onClick,
   className = "",
+  testId,
 }: {
   children: ReactNode;
   icon?: ReactNode;
   disabled?: boolean;
   onClick?: () => void;
   className?: string;
+  testId?: string;
 }) {
   return (
     <button
       type="button"
       disabled={disabled}
       onClick={onClick}
+      data-testid={testId}
       className={[
         "inline-flex items-center justify-center gap-2 rounded-lg border-2 px-5.5",
         icon ? "h-15" : "h-13.75",

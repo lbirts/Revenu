@@ -3,6 +3,7 @@ import Page from "../components/Page";
 import PageHeader from "../components/PageHeader";
 import Tag from "../components/Tag";
 import { reports, reportTypes, statusColor, type ReportType } from "../data";
+import { slug } from "@/lib/utils";
 
 export default function Reports({
   onEditTimeline,
@@ -21,7 +22,7 @@ export default function Reports({
         onEditTimeline={onEditTimeline}
       />
 
-      <div className="flex gap-4">
+      <div data-testid="report-filters" className="flex gap-4">
         {reportTypes.map((t) => (
           <Tag
             key={t}
@@ -32,9 +33,12 @@ export default function Reports({
         ))}
       </div>
 
-      <div className="rounded-lg bg-panel px-5.5 py-6">
-        <div className="flex flex-col gap-6">
-          <div className="grid grid-cols-[1fr_2fr_2fr_1fr_1fr]">
+      <div data-testid="reports-card" className="rounded-lg bg-panel px-5.5 py-6">
+        <div data-testid="reports-table" className="flex flex-col gap-6">
+          <div
+            data-testid="reports-table-head"
+            className="grid grid-cols-[1fr_2fr_2fr_1fr_1fr]"
+          >
             <span className="text-xs leading-none text-muted">ID</span>
             <span className="text-xs leading-none text-muted">Name</span>
             <span className="text-xs leading-none text-muted">Type</span>
@@ -46,6 +50,7 @@ export default function Reports({
           {rows.map((r) => (
             <div
               key={r.id}
+              data-testid={`report-row-${slug(r.id)}`}
               className="grid grid-cols-[1fr_2fr_2fr_1fr_1fr]"
             >
               <span className="text-xs leading-none text-muted">{r.id}</span>
@@ -53,6 +58,7 @@ export default function Reports({
               <span className="text-xs leading-none text-ink">{r.type}</span>
               <span className="text-xs leading-none text-muted">{r.date}</span>
               <span
+                data-testid={`report-row-${slug(r.id)}-status`}
                 className="text-right text-xs leading-none"
                 style={{ color: statusColor[r.status] }}
               >

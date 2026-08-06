@@ -49,6 +49,7 @@ export default function MiniBars() {
   return (
     <ChartContainer
       config={config}
+      data-testid="monthly-revenue-chart"
       className="absolute inset-0 h-full w-full aspect-auto!"
     >
       <BarChart

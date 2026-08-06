@@ -25,7 +25,11 @@ function PillTip({
 
 export default function Donut() {
   return (
-    <ChartContainer config={config} className="size-35.5 shrink-0 aspect-auto!">
+    <ChartContainer
+      config={config}
+      data-testid="traffic-donut"
+      className="size-35.5 shrink-0 aspect-auto!"
+    >
       <PieChart margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
         <Pie
           data={traffic}

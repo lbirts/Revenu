@@ -1,3 +1,5 @@
+import { slug } from "@/lib/utils";
+
 export default function Tag({
   label,
   selected,
@@ -11,6 +13,8 @@ export default function Tag({
     <button
       type="button"
       onClick={onClick}
+      data-testid={`report-filter-${slug(label)}`}
+      aria-pressed={selected}
       className={[
         "inline-flex h-11.75 cursor-pointer items-center justify-center rounded-lg border-2 px-5.5",
         "text-base font-medium leading-none",
