@@ -1,7 +1,6 @@
 import { ChartContainer, type ChartConfig } from "@/components/ui/chart";
-import { useRef, useState } from "react";
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
-import { fmtUSD, revExpBars } from "../../data";
+import { Bar, BarChart, CartesianGrid, Tooltip, XAxis, YAxis } from "recharts";
+import { fmtUSD } from "../../data";
 import {
   HAIRLINE,
   PLOT_MARGIN,
@@ -18,52 +17,37 @@ const config = {
   value: { label: "Revenue", color: "#24e9bb" },
 } satisfies ChartConfig;
 
-const PLOT_W = 952;
-const FIRST_X = 48;
-const PITCH = 81;
-
-export default function BarsChart() {
-  const wrapRef = useRef<HTMLDivElement>(null);
-  const [tip, setTip] = useState<{ x: number; y: number; text: string } | null>(
-    null,
+function PillTip({
+  active,
+  payload,
+}: {
+  active?: boolean;
+  payload?: { value?: number }[];
+}) {
+  if (!active || !payload?.length) return null;
+  return (
+    <div style={{ transform: "translate(-50%, calc(-100% - 11px))" }}>
+      <Pill text={fmtUSD(payload[0].value ?? 0)} />
+    </div>
   );
+}
 
-  const onMove = (e: React.MouseEvent) => {
-    const wrap = wrapRef.current;
-    if (!wrap) return;
-    const rect = wrap.getBoundingClientRect();
-    const px = e.clientX - rect.left;
-    const designX = (px / rect.width) * PLOT_W;
-    const i = Math.round((designX - FIRST_X) / PITCH);
-    const near =
-      i >= 0 &&
-      i < revExpBars.length &&
-      Math.abs(designX - (FIRST_X + i * PITCH)) <= 20;
-    setTip(
-      near
-        ? {
-            x: px,
-            y: e.clientY - rect.top,
-            text: fmtUSD(revExpBars[i].value),
-          }
-        : null,
-    );
-  };
-
+export default function BarsChart({
+  data,
+}: {
+  data: { month: string; value: number }[];
+}) {
   return (
     <div
-      ref={wrapRef}
       data-testid="rev-exp-chart-wrap"
       className="relative h-full w-full"
-      onMouseMove={onMove}
-      onMouseLeave={() => setTip(null)}
     >
       <ChartContainer
         config={config}
         data-testid="rev-exp-chart"
         className="h-full w-full aspect-auto!"
       >
-        <BarChart data={revExpBars} margin={PLOT_MARGIN}>
+        <BarChart data={data} margin={PLOT_MARGIN}>
           <CartesianGrid stroke={HAIRLINE} />
           <YAxis
             domain={Y_DOMAIN}
@@ -82,6 +66,14 @@ export default function BarsChart() {
             tickLine={false}
             tick={monthTick(261)}
           />
+          <Tooltip
+            content={<PillTip />}
+            cursor={false}
+            offset={0}
+            allowEscapeViewBox={{ x: true, y: true }}
+            isAnimationActive={false}
+            wrapperStyle={{ zIndex: 10, outline: "none" }}
+          />
           <Bar
             dataKey="value"
             barSize={16}
@@ -92,15 +84,6 @@ export default function BarsChart() {
           />
         </BarChart>
       </ChartContainer>
-
-      {tip && (
-        <div
-          className="pointer-events-none absolute z-10 -translate-x-1/2 -translate-y-full"
-          style={{ left: tip.x, top: tip.y - 14 }}
-        >
-          <Pill text={tip.text} />
-        </div>
-      )}
     </div>
   );
 }

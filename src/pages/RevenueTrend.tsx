@@ -3,8 +3,11 @@ import BarsChart from "../components/charts/BarsChart";
 import Page from "../components/Page";
 import PageHeader from "../components/PageHeader";
 import StatCard from "../components/StatCard";
-import { monthlyBreakdown, overviewStats } from "../data";
+import { monthlyBreakdown, months, revExpBars } from "../data";
+import { revenueTrendStats } from "../stats";
+import { formatTimeline, inTimeline } from "../timeline";
 import { slug } from "@/lib/utils";
+import type { DateRange } from "react-day-picker";
 
 const cellAlign = [
   "text-left",
@@ -39,25 +42,29 @@ function Row({
 
 export default function RevenueTrend({
   onEditTimeline,
+  timeline,
 }: {
   onEditTimeline: () => void;
+  timeline: DateRange | undefined;
 }) {
+  const label = formatTimeline(timeline);
+
   return (
     <Page>
       <PageHeader
         title="Overview"
-        subtitle="Dec 2025 - Mar 2026"
+        subtitle={label}
         onEditTimeline={onEditTimeline}
       />
 
       <div data-testid="stat-row" className="flex gap-4">
-        {overviewStats.map((s) => (
+        {revenueTrendStats(inTimeline(months, timeline)).map((s) => (
           <StatCard key={s.label} {...s} />
         ))}
       </div>
 
-      <ChartCard title="Revenue vs Expenses">
-        <BarsChart />
+      <ChartCard title="Revenue vs Expenses" range={label}>
+        <BarsChart data={inTimeline(revExpBars, timeline)} />
       </ChartCard>
 
       <div data-testid="breakdown-card" className="rounded-lg bg-panel px-5.5 py-6">
@@ -73,7 +80,7 @@ export default function RevenueTrend({
             cells={["Month", "Revenue", "Expenses", "Profit", "Margin"]}
             colors={Array(5).fill("text-muted")}
           />
-          {monthlyBreakdown.map((r) => (
+          {inTimeline(monthlyBreakdown, timeline).map((r) => (
             <Row
               key={r.month}
               testId={`breakdown-row-${slug(r.month)}`}

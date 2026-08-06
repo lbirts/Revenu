@@ -4,9 +4,11 @@ import { CalendarIcon } from "../icons";
 
 export default function ChartCard({
   title,
+  range,
   children,
 }: {
   title: string;
+  range: string;
   children: ReactNode;
 }) {
   const id = slug(title);
@@ -27,9 +29,7 @@ export default function ChartCard({
           className="flex items-center gap-2 pt-2"
         >
           <CalendarIcon className="text-ink" />
-          <span className="text-sm leading-none text-ink">
-            Jan 2026 - Dec 2026
-          </span>
+          <span className="text-sm leading-none text-ink">{range}</span>
         </div>
       </div>
       <div className="absolute inset-6">{children}</div>

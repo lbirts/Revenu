@@ -7,7 +7,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { fmtUSD, trendPoints } from "../../data";
+import { fmtUSD } from "../../data";
 import {
   HAIRLINE,
   PLOT_MARGIN,
@@ -78,14 +78,18 @@ function PillTip({
   );
 }
 
-export default function TrendChart() {
+export default function TrendChart({
+  data,
+}: {
+  data: { month: string; value: number }[];
+}) {
   return (
     <ChartContainer
       config={config}
       data-testid="trend-chart"
       className="h-full w-full aspect-auto!"
     >
-      <AreaChart data={trendPoints} margin={PLOT_MARGIN}>
+      <AreaChart data={data} margin={PLOT_MARGIN}>
         <defs>
           <linearGradient id="trendFill" x1="0" y1="0" x2="0" y2="1">
             <stop offset="15.58%" stopColor="#098165" stopOpacity={0.78} />

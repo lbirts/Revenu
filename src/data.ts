@@ -13,54 +13,39 @@ export const MONTHS = [
   "Dec",
 ];
 
-/* ---------- Home ---------- */
+/* ---------- Monthly figures ---------- */
 
-export const homeStats = [
-  {
-    label: "Total Revenue",
-    value: "$785K",
-    delta: "12.4%",
-    up: true,
-    positive: true,
-  },
-  {
-    label: "Active Users",
-    value: "32.2%",
-    delta: "10.4%",
-    up: true,
-    positive: true,
-  },
-  {
-    label: "Conversion",
-    value: "3.24%",
-    delta: "0.7%",
-    up: false,
-    positive: false,
-  },
-  {
-    label: "Average Session",
-    value: "4m 12s",
-    delta: "8.6%",
-    up: true,
-    positive: true,
-  },
+/* Every stat card and revenue chart reads from this one table, so the
+   dashboard can't contradict itself when the timeline narrows. */
+export type MonthRow = {
+  key: string;
+  month: string;
+  revenue: number;
+  activeRate: number;
+  conversion: number;
+  sessionSeconds: number;
+  mrr: number;
+  arpu: number;
+  churn: number;
+};
+
+export const months: MonthRow[] = [
+  { key: "2026-01", month: "Jan", revenue: 43600, activeRate: 28.4, conversion: 3.62, sessionSeconds: 228, mrr: 52.0, arpu: 21.4, churn: 2.6 },
+  { key: "2026-02", month: "Feb", revenue: 50700, activeRate: 29.1, conversion: 3.55, sessionSeconds: 232, mrr: 55.4, arpu: 21.9, churn: 2.5 },
+  { key: "2026-03", month: "Mar", revenue: 60000, activeRate: 30.2, conversion: 3.48, sessionSeconds: 236, mrr: 58.2, arpu: 22.4, churn: 2.42 },
+  { key: "2026-04", month: "Apr", revenue: 69300, activeRate: 31.0, conversion: 3.4, sessionSeconds: 240, mrr: 60.6, arpu: 22.9, churn: 2.32 },
+  { key: "2026-05", month: "May", revenue: 53600, activeRate: 30.6, conversion: 3.33, sessionSeconds: 244, mrr: 62.4, arpu: 23.4, churn: 2.24 },
+  { key: "2026-06", month: "Jun", revenue: 61400, activeRate: 31.8, conversion: 3.26, sessionSeconds: 248, mrr: 64.0, arpu: 23.9, churn: 2.14 },
+  { key: "2026-07", month: "Jul", revenue: 69300, activeRate: 32.4, conversion: 3.2, sessionSeconds: 252, mrr: 66.2, arpu: 24.4, churn: 2.06 },
+  { key: "2026-08", month: "Aug", revenue: 82900, activeRate: 33.1, conversion: 3.14, sessionSeconds: 256, mrr: 68.4, arpu: 24.9, churn: 1.98 },
+  { key: "2026-09", month: "Sep", revenue: 92900, activeRate: 34.2, conversion: 3.08, sessionSeconds: 260, mrr: 70.6, arpu: 25.4, churn: 1.9 },
+  { key: "2026-10", month: "Oct", revenue: 90700, activeRate: 35.0, conversion: 3.02, sessionSeconds: 264, mrr: 72.8, arpu: 25.9, churn: 1.82 },
+  { key: "2026-11", month: "Nov", revenue: 70000, activeRate: 34.6, conversion: 2.96, sessionSeconds: 268, mrr: 74.4, arpu: 26.4, churn: 1.74 },
+  { key: "2026-12", month: "Dec", revenue: 103600, activeRate: 36.0, conversion: 2.84, sessionSeconds: 296, mrr: 80.0, arpu: 27.26, churn: 1.48 },
 ];
 
-/* Revenue Trend */
-export const trendPoints = [
-  { month: "Jan", value: 43600 },
-  { month: "Feb", value: 50700 },
-  { month: "Mar", value: 60000 },
-  { month: "Apr", value: 69300 },
-  { month: "May", value: 53600 },
-  { month: "Jun", value: 61400 },
-  { month: "Jul", value: 69300 },
-  { month: "Aug", value: 82900 },
-  { month: "Sep", value: 92900 },
-  { month: "Oct", value: 90700 },
-  { month: "Nov", value: 70000 },
-  { month: "Dec", value: 103600 },
-];
+export const revenueSeries = (rows: MonthRow[]) =>
+  rows.map((m) => ({ month: m.month, value: m.revenue }));
 
 /* Traffic donut */
 export const traffic = [
@@ -78,56 +63,28 @@ export const trafficLegend = ["Organic", "Direct", "Social", "Email"].map(
   },
 );
 
-/* Monthly Revenue (Home, Jan–Jun) */
-export const monthlyRevenue = [
-  { month: "Jan", value: 50600 },
-  { month: "Feb", value: 70600 },
-  { month: "Mar", value: 70600 },
-  { month: "Apr", value: 91800 },
-  { month: "May", value: 105900 },
-  { month: "Jun", value: 120000 },
-];
-
 /* ---------- Revenue Trend page ---------- */
-
-export const overviewStats = [
-  {
-    label: "Total Revenue",
-    value: "$785K",
-    delta: "12.4%",
-    up: true,
-    positive: true,
-  },
-  { label: "MRR", value: "$65.4", delta: "9.2%", up: true, positive: true },
-  { label: "ARPU", value: "$24.18", delta: "5.6%", up: true, positive: true },
-  {
-    label: "Churn Rate",
-    value: "2.1%",
-    delta: "0.3%",
-    up: false,
-    positive: true,
-  },
-];
 
 /* Revenue vs Expenses */
 export const revExpBars = [
-  { month: "Jan", value: 30000 },
-  { month: "Feb", value: 44300 },
-  { month: "Mar", value: 57100 },
-  { month: "Apr", value: 53600 },
-  { month: "May", value: 77900 },
-  { month: "Jun", value: 77900 },
-  { month: "Jul", value: 90000 },
-  { month: "Aug", value: 100000 },
-  { month: "Sep", value: 113600 },
-  { month: "Oct", value: 77900 },
-  { month: "Nov", value: 90000 },
-  { month: "Dec", value: 120000 },
+  { key: "2026-01", month: "Jan", value: 30000 },
+  { key: "2026-02", month: "Feb", value: 44300 },
+  { key: "2026-03", month: "Mar", value: 57100 },
+  { key: "2026-04", month: "Apr", value: 53600 },
+  { key: "2026-05", month: "May", value: 77900 },
+  { key: "2026-06", month: "Jun", value: 77900 },
+  { key: "2026-07", month: "Jul", value: 90000 },
+  { key: "2026-08", month: "Aug", value: 100000 },
+  { key: "2026-09", month: "Sep", value: 113600 },
+  { key: "2026-10", month: "Oct", value: 77900 },
+  { key: "2026-11", month: "Nov", value: 90000 },
+  { key: "2026-12", month: "Dec", value: 120000 },
 ];
 
 /* Monthly Breakdown table */
 export const monthlyBreakdown = [
   {
+    key: "2026-01",
     month: "Jan",
     revenue: "$42.000",
     expenses: "$28.000",
@@ -135,6 +92,7 @@ export const monthlyBreakdown = [
     margin: "33.3%",
   },
   {
+    key: "2026-02",
     month: "Feb",
     revenue: "$51.000",
     expenses: "$31.000",
@@ -142,13 +100,15 @@ export const monthlyBreakdown = [
     margin: "39.2%",
   },
   {
-    month: "March",
+    key: "2026-03",
+    month: "Mar",
     revenue: "$47.000",
     expenses: "$29.000",
     profit: "$18.000",
     margin: "38.3%",
   },
   {
+    key: "2026-04",
     month: "Apr",
     revenue: "$63.000",
     expenses: "$34.000",
@@ -156,6 +116,7 @@ export const monthlyBreakdown = [
     margin: "46.0%",
   },
   {
+    key: "2026-05",
     month: "May",
     revenue: "$58.000",
     expenses: "$32.000",
@@ -163,6 +124,7 @@ export const monthlyBreakdown = [
     margin: "44.8%",
   },
   {
+    key: "2026-06",
     month: "Jun",
     revenue: "$74.000",
     expenses: "$38.000",
@@ -170,6 +132,7 @@ export const monthlyBreakdown = [
     margin: "48.6%",
   },
   {
+    key: "2026-07",
     month: "Jul",
     revenue: "$69.000",
     expenses: "$36.000",
@@ -177,6 +140,7 @@ export const monthlyBreakdown = [
     margin: "47.8%",
   },
   {
+    key: "2026-08",
     month: "Aug",
     revenue: "$82.000",
     expenses: "$41.000",
@@ -184,6 +148,7 @@ export const monthlyBreakdown = [
     margin: "50.0%",
   },
   {
+    key: "2026-09",
     month: "Sep",
     revenue: "$91.000",
     expenses: "$44.000",
@@ -191,6 +156,7 @@ export const monthlyBreakdown = [
     margin: "51.6%",
   },
   {
+    key: "2026-10",
     month: "Oct",
     revenue: "$87.000",
     expenses: "$43.000",
@@ -198,6 +164,7 @@ export const monthlyBreakdown = [
     margin: "50.6%",
   },
   {
+    key: "2026-11",
     month: "Nov",
     revenue: "$103.000",
     expenses: "$49.000",
@@ -205,6 +172,7 @@ export const monthlyBreakdown = [
     margin: "52.4%",
   },
   {
+    key: "2026-12",
     month: "Dec",
     revenue: "$118.000",
     expenses: "$55.000",
@@ -286,7 +254,7 @@ export const reports: {
     id: "RPT - 008",
     name: "SEO Performance Q3",
     type: "Marketing",
-    date: "2025 - 12 - 31",
+    date: "2026 - 01 - 06",
     status: "Published",
   },
 ];

@@ -1,32 +1,42 @@
 import { Calendar } from "@/components/ui/calendar";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { slug } from "@/lib/utils";
-import { useState } from "react";
+import {
+  TIMELINE_FIRST_MONTH,
+  TIMELINE_MONTHS,
+  TIMELINE_TODAY,
+  formatTimelineDays,
+  isCompleteRange,
+} from "@/timeline";
+import { useEffect, useState } from "react";
 import type { DateRange } from "react-day-picker";
 import { CloseIcon } from "../icons";
 
 const WEEK = ["S", "M", "T", "W", "T", "F", "S"];
-const DEFAULT_RANGE: DateRange = {
-  from: new Date(2025, 7, 17),
-  to: new Date(2025, 7, 23),
-};
-const TODAY = new Date(2025, 7, 5); // outlined in the design
-
-const fmt = (d: Date) =>
-  d.toLocaleDateString("en-US", { month: "short", day: "numeric" });
 
 export default function DatePickerModal({
   open,
+  value,
+  onSave,
   onClose,
 }: {
   open: boolean;
+  value: DateRange | undefined;
+  onSave: (range: DateRange) => void;
   onClose: () => void;
 }) {
-  const [range, setRange] = useState<DateRange | undefined>(DEFAULT_RANGE);
+  const [draft, setDraft] = useState<DateRange | undefined>(value);
+  useEffect(() => {
+    if (open) setDraft(value);
+  }, [open, value]);
 
-  const label = range?.from
-    ? `${fmt(range.from)} – ${range.to ? fmt(range.to) : "..."}`
-    : "Select dates";
+  const canSave = isCompleteRange(draft);
+
+  const save = () => {
+    if (!isCompleteRange(draft)) return;
+    onSave(draft);
+    onClose();
+  };
 
   return (
     <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
@@ -49,17 +59,19 @@ export default function DatePickerModal({
           >
             <CloseIcon />
           </button>
-          <TextBtn onClick={onClose}>Save</TextBtn>
+          <TextBtn onClick={save} disabled={!canSave}>
+            Save
+          </TextBtn>
         </div>
         <div className="px-6">
           <p className="text-sm font-medium leading-5 tracking-[0.1px] text-muted-2">
-            Depart - Return dates
+            Start - End dates
           </p>
           <p
             data-testid="date-picker-range"
             className="mt-2 text-[22px] leading-7 text-muted-2"
           >
-            {label}
+            {formatTimelineDays(draft)}
           </p>
         </div>
         <div className="mt-3 border-b border-m3-divider" />
@@ -80,11 +92,11 @@ export default function DatePickerModal({
         <div className="no-scrollbar flex-1 overflow-y-auto pb-2">
           <Calendar
             mode="range"
-            selected={range}
-            onSelect={setRange}
-            defaultMonth={new Date(2025, 7)}
-            numberOfMonths={5}
-            today={TODAY}
+            selected={draft}
+            onSelect={setDraft}
+            defaultMonth={TIMELINE_FIRST_MONTH}
+            numberOfMonths={TIMELINE_MONTHS}
+            today={TIMELINE_TODAY}
             disableNavigation
             showOutsideDays={false}
             formatters={{
@@ -130,10 +142,12 @@ export default function DatePickerModal({
 
         {/* footer */}
         <div className="flex items-center border-t border-m3-divider py-1 pb-2 pl-3 pr-3">
-          <TextBtn onClick={() => setRange(undefined)}>Clear</TextBtn>
+          <TextBtn onClick={() => setDraft(undefined)}>Clear</TextBtn>
           <div className="ml-auto flex">
             <TextBtn onClick={onClose}>Cancel</TextBtn>
-            <TextBtn onClick={onClose}>OK</TextBtn>
+            <TextBtn onClick={save} disabled={!canSave}>
+              OK
+            </TextBtn>
           </div>
         </div>
       </DialogContent>
@@ -144,16 +158,19 @@ export default function DatePickerModal({
 function TextBtn({
   children,
   onClick,
+  disabled = false,
 }: {
   children: string;
   onClick: () => void;
+  disabled?: boolean;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
+      disabled={disabled}
       data-testid={`date-picker-${slug(children)}`}
-      className="h-12 cursor-pointer rounded-full px-3 text-sm font-medium text-accent transition-colors duration-300 ease-(--ease-app) hover:bg-accent/10"
+      className="h-12 cursor-pointer rounded-full px-3 text-sm font-medium text-accent transition-colors duration-300 ease-(--ease-app) hover:bg-accent/10 disabled:cursor-default disabled:text-muted-2/40 disabled:hover:bg-transparent"
     >
       {children}
     </button>

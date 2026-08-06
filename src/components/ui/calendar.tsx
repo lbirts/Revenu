@@ -8,7 +8,7 @@ import {
   type Locale,
 } from "react-day-picker"
 
-import { cn } from "@/lib/utils"
+import { cn, isoDay } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { ChevronLeftIcon, ChevronRightIcon, ChevronDownIcon } from "lucide-react"
 
@@ -199,6 +199,7 @@ function CalendarDayButton({
       variant="ghost"
       size="icon"
       data-day={day.date.toLocaleDateString(locale?.code)}
+      data-testid={`day-${isoDay(day.date)}`}
       data-selected-single={
         modifiers.selected &&
         !modifiers.range_start &&

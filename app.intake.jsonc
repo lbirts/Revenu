@@ -4,7 +4,7 @@
 
   "installCommand": "npm install",
   "buildCommand": "npm run build",
-  "serveCommand": "npm run preview -- --port 4173",
+  "serveCommand": "npm run preview -- --host 127.0.0.1 --port 4173 --strictPort",
 
   "readyHeuristic": {
     "url": "http://127.0.0.1:4173/",
@@ -32,6 +32,29 @@
             { "click": "[data-testid='edit-timeline-btn']" },
             { "waitForSelector": "[data-testid='date-picker']" },
             { "waitMs": 250 },
+          ],
+        },
+        {
+          "name": "timeline-cleared",
+          "setup": [
+            { "waitForSelector": "[data-testid='page-title']" },
+            { "click": "[data-testid='edit-timeline-btn']" },
+            { "waitForSelector": "[data-testid='date-picker']" },
+            { "click": "[data-testid='date-picker-clear']" },
+            { "waitMs": 250 },
+          ],
+        },
+        {
+          "name": "timeline-saved",
+          "setup": [
+            { "waitForSelector": "[data-testid='page-title']" },
+            { "click": "[data-testid='edit-timeline-btn']" },
+            { "waitForSelector": "[data-testid='date-picker']" },
+            { "click": "[data-testid='date-picker-clear']" },
+            { "click": "[data-testid='day-2026-01-05']" },
+            { "click": "[data-testid='day-2026-02-14']" },
+            { "click": "[data-testid='date-picker-save']" },
+            { "waitMs": 400 },
           ],
         },
         {

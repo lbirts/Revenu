@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import RevenueTrend from "./pages/RevenueTrend";
 import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
+import { DEFAULT_TIMELINE } from "./timeline";
 
 let bootedOnce = false;
 // `?skeleton` holds the loading state so the shimmer can be inspected
@@ -21,6 +22,7 @@ const BOOT_MS = new URLSearchParams(window.location.search).has("skeleton")
 export default function App() {
   const [booted, setBooted] = useState(bootedOnce);
   const [pickerOpen, setPickerOpen] = useState(false);
+  const [timeline, setTimeline] = useState(DEFAULT_TIMELINE);
 
   useEffect(() => {
     if (booted) return;
@@ -54,19 +56,29 @@ export default function App() {
         className="relative min-w-0 flex-1 overflow-auto bg-bg"
       >
         <Routes>
-          <Route path="/" element={<Home onEditTimeline={openPicker} />} />
+          <Route
+            path="/"
+            element={<Home onEditTimeline={openPicker} timeline={timeline} />}
+          />
           <Route
             path="/revenue-trend"
-            element={<RevenueTrend onEditTimeline={openPicker} />}
+            element={
+              <RevenueTrend onEditTimeline={openPicker} timeline={timeline} />
+            }
           />
           <Route
             path="/reports"
-            element={<Reports onEditTimeline={openPicker} />}
+            element={<Reports onEditTimeline={openPicker} timeline={timeline} />}
           />
           <Route path="/settings" element={<Settings />} />
         </Routes>
       </main>
-      <DatePickerModal open={pickerOpen} onClose={() => setPickerOpen(false)} />
+      <DatePickerModal
+        open={pickerOpen}
+        value={timeline}
+        onSave={setTimeline}
+        onClose={() => setPickerOpen(false)}
+      />
       {/* toast anchor: 80px into the content area, 62px from the bottom (design) */}
       <Toaster position="bottom-left" offset={{ bottom: 62, left: 360 }} />
     </div>

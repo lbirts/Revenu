@@ -3,22 +3,30 @@ import Page from "../components/Page";
 import PageHeader from "../components/PageHeader";
 import Tag from "../components/Tag";
 import { reports, reportTypes, statusColor, type ReportType } from "../data";
+import { formatTimeline, inTimeline, reportMonthKey } from "../timeline";
 import { slug } from "@/lib/utils";
+import type { DateRange } from "react-day-picker";
 
 export default function Reports({
   onEditTimeline,
+  timeline,
 }: {
   onEditTimeline: () => void;
+  timeline: DateRange | undefined;
 }) {
   const [selected, setSelected] = useState<ReportType>("All");
+  const inRange = inTimeline(
+    reports.map((r) => ({ ...r, key: reportMonthKey(r.date) })),
+    timeline,
+  );
   const rows =
-    selected === "All" ? reports : reports.filter((r) => r.type === selected);
+    selected === "All" ? inRange : inRange.filter((r) => r.type === selected);
 
   return (
     <Page>
       <PageHeader
         title="Reports"
-        subtitle="Dec 2025 - Mar 2026"
+        subtitle={formatTimeline(timeline)}
         onEditTimeline={onEditTimeline}
       />
 

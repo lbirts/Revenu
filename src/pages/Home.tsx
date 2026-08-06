@@ -5,30 +5,38 @@ import TrendChart from "../components/charts/TrendChart";
 import Page from "../components/Page";
 import PageHeader from "../components/PageHeader";
 import StatCard from "../components/StatCard";
-import { homeStats, trafficLegend } from "../data";
+import { months, revenueSeries, trafficLegend } from "../data";
+import { homeStats } from "../stats";
+import { formatTimeline, inTimeline } from "../timeline";
 import { slug } from "@/lib/utils";
+import type { DateRange } from "react-day-picker";
 
 export default function Home({
   onEditTimeline,
+  timeline,
 }: {
   onEditTimeline: () => void;
+  timeline: DateRange | undefined;
 }) {
+  const shown = inTimeline(months, timeline);
+  const label = formatTimeline(timeline);
+
   return (
     <Page>
       <PageHeader
         title="Overview"
-        subtitle="Dec 2025 - Mar 2026"
+        subtitle={label}
         onEditTimeline={onEditTimeline}
       />
 
       <div data-testid="stat-row" className="flex gap-4">
-        {homeStats.map((s) => (
+        {homeStats(shown).map((s) => (
           <StatCard key={s.label} {...s} />
         ))}
       </div>
 
-      <ChartCard title="Revenue Trend">
-        <TrendChart />
+      <ChartCard title="Revenue Trend" range={label}>
+        <TrendChart data={revenueSeries(shown)} />
       </ChartCard>
 
       <div data-testid="insight-row" className="flex gap-4">
@@ -78,7 +86,7 @@ export default function Home({
           >
             Monthly Revenue
           </h3>
-          <MiniBars />
+          <MiniBars data={revenueSeries(shown)} />
         </div>
       </div>
     </Page>

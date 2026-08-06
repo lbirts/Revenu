@@ -1,6 +1,6 @@
 import { ChartContainer, type ChartConfig } from "@/components/ui/chart";
 import { Bar, BarChart, CartesianGrid, Tooltip, XAxis, YAxis } from "recharts";
-import { fmtUSD, monthlyRevenue } from "../../data";
+import { fmtUSD } from "../../data";
 import { HAIRLINE, Pill, fmtAxis, type TickProps } from "./common";
 
 const config = {
@@ -45,7 +45,11 @@ function PillTip({
   );
 }
 
-export default function MiniBars() {
+export default function MiniBars({
+  data,
+}: {
+  data: { month: string; value: number }[];
+}) {
   return (
     <ChartContainer
       config={config}
@@ -53,7 +57,7 @@ export default function MiniBars() {
       className="absolute inset-0 h-full w-full aspect-auto!"
     >
       <BarChart
-        data={monthlyRevenue}
+        data={data}
         margin={{ top: 79, right: 37, bottom: 0, left: 0 }}
       >
         <CartesianGrid stroke={HAIRLINE} />
