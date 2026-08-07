@@ -73,7 +73,7 @@ export function SelectField({
       <Select value={value} onValueChange={(v) => onChange(v as string)}>
         <SelectTrigger
           data-testid={`field-${id}-trigger`}
-          className={`${fieldBase} cursor-pointer justify-between text-muted focus-visible:border-ink focus-visible:ring-0 data-[size=default]:h-14 [&_svg:not([class*='size-'])]:text-muted`}
+          className={`${fieldBase} cursor-pointer justify-between text-muted focus-visible:border-ink focus-visible:ring-0 [&_svg:not([class*='size-'])]:text-muted`}
         >
           <SelectValue />
         </SelectTrigger>
