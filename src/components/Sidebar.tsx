@@ -69,7 +69,7 @@ export default function Sidebar({
               [
                 "flex items-center gap-2 overflow-hidden whitespace-nowrap px-8 transition-colors duration-300 ease-(--ease-app)",
                 isActive
-                  ? "h-12.75 border-b border-accent text-accent drop-shadow-[0_4px_25px_rgb(44_197_131_/_var(--nav-glow))] [--nav-glow:0.8]"
+                  ? "h-12.75 border-b border-accent text-accent drop-shadow-[0_4px_25px_rgb(44_197_131_/_var(--nav-glow))] [--nav-glow:80%]"
                   : "h-12.5 text-muted hover:text-ink",
               ].join(" ")
             }
