@@ -59,7 +59,7 @@ export default function App() {
         data-testid="main"
         ref={mainRef}
         onScroll={(e) => setScrolled(e.currentTarget.scrollTop > 240)}
-        className="relative min-w-0 flex-1 overflow-auto bg-bg"
+        className="relative min-w-0 flex-1 overflow-auto bg-bg will-change-transform"
       >
         {scrolled && (
           <button
