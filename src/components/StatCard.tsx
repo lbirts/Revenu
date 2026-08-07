@@ -19,7 +19,6 @@ export default function StatCard({
   return (
     <div
       data-testid={`stat-card-${id}`}
-      style={{ "--tone": positive ? "up" : "down" } as CSSProperties}
       className="flex h-35.75 grow basis-0 flex-col gap-1 rounded-lg bg-panel p-6"
     >
       <p
@@ -36,6 +35,7 @@ export default function StatCard({
       </p>
       <div
         data-testid={`stat-card-${id}-delta`}
+        style={{ "--tone": positive ? "up" : "down" } as CSSProperties}
         className="stat-delta flex h-6 items-center text-accent"
       >
         <DeltaArrowIcon down={!up} />
