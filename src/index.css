@@ -4,8 +4,6 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  color-scheme: dark;
-
   --grey-panel: #1e201f;
   --grey-panel-raised: #191b1a;
 
