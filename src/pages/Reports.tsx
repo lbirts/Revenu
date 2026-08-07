@@ -45,7 +45,7 @@ export default function Reports({
         <div data-testid="reports-table" className="flex flex-col gap-6">
           <div
             data-testid="reports-table-head"
-            className="sticky top-0 z-10 grid grid-cols-[1fr_2fr_2fr_1fr_1fr] bg-panel pb-3 shadow-[0_1px_0_var(--color-hairline)]"
+            className="sticky top-0 z-10 grid grid-cols-[1fr_2fr_2fr_1fr_1fr] pb-3 shadow-[0_1px_0_var(--color-hairline)]"
           >
             <span className="text-xs leading-none text-muted">ID</span>
             <span className="text-xs leading-none text-muted">Name</span>
