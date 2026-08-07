@@ -123,7 +123,7 @@ export default function DatePickerModal({
               day: "group/day relative size-12 select-none p-0 text-center",
               range_start:
                 "relative isolate z-0 after:absolute after:inset-y-1 after:left-1/2 after:right-0 after:z-0 after:bg-range-band",
-              range_middle: "bg-range-band bg-clip-content py-1",
+              disabled: "bg-range-band bg-clip-content py-1",
               range_end:
                 "relative isolate z-0 after:absolute after:inset-y-1 after:left-0 after:right-1/2 after:z-0 after:bg-range-band",
               today:
