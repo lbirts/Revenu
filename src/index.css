@@ -201,3 +201,7 @@ body {
     @apply font-sans;
   }
 }
+
+.react-loading-skeleton {
+  animation-play-state: paused;
+}
