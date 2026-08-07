@@ -59,7 +59,7 @@ export default function Reports({
             <div
               key={r.id}
               data-testid={`report-row-${slug(r.id)}`}
-              className="grid grid-cols-[1fr_2fr_2fr_1fr_1fr]"
+              className="grid grid-cols-[1fr_1fr_2fr_1fr_1fr]"
             >
               <span className="text-xs leading-none text-muted">{r.id}</span>
               <span className="min-w-0 pr-4">
