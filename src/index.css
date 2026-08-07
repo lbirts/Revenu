@@ -17,7 +17,7 @@
   --font-sans: "Roboto", system-ui, -apple-system, sans-serif;
 
   --color-bg: #141514;
-  --color-panel: var(--surface-raised);
+  --color-panel: var(--surface-sunken);
   --color-panel-2: var(--surface-sunken);
   --color-ink: #ffffff;
   --color-muted: #86868c; /* secondary text */
