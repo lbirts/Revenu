@@ -34,7 +34,7 @@
   --color-m3-divider: #cac4d0;
   --color-range-band: #404846; /* date-picker range band */
 
-  --color-hairline: rgb(134 134 140 / 0.08); /* chart grid + card hairlines */
+  --color-hairline: rgb(148 163 184 / 0.08); /* chart grid + card hairlines */
   --color-accent-hairline: rgb(35 231 184 / 0.08); /* modal border */
 }
 
