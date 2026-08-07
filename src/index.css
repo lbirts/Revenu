@@ -39,7 +39,7 @@
 }
 
 :root {
-  --ease-app: cubic-bezier(0, 0, 0.58, 1);
+  --ease-app: linear;
   --shadow-glow-btn: 0 0 24px rgb(44 197 131 / 0.48); /* #2cc5837a */
   --shadow-glow-dot: 0 0 24px rgb(44 197 131 / 0.8); /* #2cc583cc */
   --shadow-nav-active: 0 4px 25px rgb(44 197 131 / 0.8);
