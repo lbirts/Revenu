@@ -201,3 +201,7 @@ body {
     @apply font-sans;
   }
 }
+
+[data-status="Review"] {
+  color: var(--color-ink);
+}
