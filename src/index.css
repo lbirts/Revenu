@@ -20,7 +20,7 @@
   --color-panel: var(--surface-raised);
   --color-panel-2: var(--surface-sunken);
   --color-ink: #ffffff;
-  --color-muted: #86868c; /* secondary text */
+  --color-muted: #7c7c82; /* secondary text */
   --color-muted-2: #89898e; /* disabled / placeholder */
   --color-typing: #838886; /* input value while typing */
   --color-accent: #24e9bb;
