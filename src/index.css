@@ -114,8 +114,8 @@ body {
 
 @supports (backdrop-filter: blur(1px)) {
   .scrim {
-    background: rgb(30 32 31 / 0.7);
-    backdrop-filter: blur(20px);
+    background: rgb(30 32 31 / 0.94);
+    backdrop-filter: none;
   }
 }
 @supports not (backdrop-filter: blur(1px)) {
