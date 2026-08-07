@@ -14,7 +14,7 @@ const cellAlign = [
   "text-center",
   "text-center",
   "text-center",
-  "text-right",
+  "text-center",
 ];
 
 function Row({
