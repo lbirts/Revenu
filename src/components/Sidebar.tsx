@@ -27,7 +27,7 @@ export default function Sidebar({
     <aside
       data-testid="sidebar"
       data-collapsed={collapsed}
-      className={`relative z-10 flex shrink-0 flex-col bg-panel transition-[width] duration-300 ease-(--ease-app) ${
+      className={`relative z-10 flex shrink-0 flex-col bg-panel transition-[width] duration-700 ease-(--ease-app) ${
         collapsed ? "w-22" : "w-70"
       }`}
     >
