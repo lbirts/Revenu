@@ -44,7 +44,7 @@ export default function DatePickerModal({
         data-testid="date-picker"
         showCloseButton={false}
         overlayClassName="scrim z-40"
-        className="top-38.5 right-20 left-auto z-50 flex h-174 max-h-[calc(100vh-174px)] w-90 max-w-none translate-x-0 translate-y-0 flex-col gap-0 rounded-lg border border-accent-hairline bg-panel-2 p-0 ring-0 sm:max-w-none"
+        className="top-38.5 right-20 left-auto z-50 flex h-174 max-h-[calc(100vh-174px)] w-90 max-w-none translate-x-0 translate-y-0 flex-col gap-0 rounded-lg border border-accent-hairline bg-panel-2 ring-0 sm:max-w-none"
       >
         <DialogTitle className="sr-only">Edit timeline</DialogTitle>
 
