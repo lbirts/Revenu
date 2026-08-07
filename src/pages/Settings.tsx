@@ -128,7 +128,7 @@ export default function Settings() {
             <div
               key={n.key}
               data-testid={`notification-row-${n.key}`}
-              className={`flex h-13.5 items-center justify-between border-l-2 border-l-transparent pl-3 has-data-checked:border-l-accent ${
+              className={`flex h-13.5 items-center justify-between border-l-2 border-l-transparent pl-3 has-[>[data-checked]]:border-l-accent ${
                 i < defaultNotifications.length - 1
                   ? "border-b border-b-input-border"
                   : ""
