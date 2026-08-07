@@ -167,7 +167,7 @@ export const revenueSeries = (rows: MonthRow[]) =>
 
 /* Traffic donut */
 export const traffic = [
-  { label: "Email", value: 6, color: "#034e42" },
+  { label: "Email", value: 6, color: "#1e201f" },
   { label: "Organic", value: 59, color: "#24e9bb" },
   { label: "Direct", value: 25, color: "#08bd9f" },
   { label: "Social", value: 10, color: "#068973" },
