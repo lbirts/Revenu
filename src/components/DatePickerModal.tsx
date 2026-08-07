@@ -81,7 +81,7 @@ export default function DatePickerModal({
             <div
               key={i}
               data-testid={`weekday-${i}`}
-              className="flex h-12 w-12 items-center justify-center text-base tracking-[0.5px] text-muted-2"
+              className="flex h-12 w-11 items-center justify-center text-base tracking-[0.5px] text-muted-2"
             >
               {w}
             </div>
