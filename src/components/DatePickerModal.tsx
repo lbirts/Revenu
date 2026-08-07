@@ -131,7 +131,7 @@ export default function DatePickerModal({
               outside: "text-muted-2/50",
               hidden: "invisible",
               day_button: [
-                "relative z-10 m-1 flex size-10 min-w-0 items-center justify-center rounded-full border-0 bg-transparent p-0",
+                "relative z-10 m-1 flex size-10 items-center justify-center rounded-full border-0 bg-transparent p-0",
                 "text-base font-normal tracking-[0.5px] text-muted-2",
                 "hover:bg-white/5 hover:text-ink",
                 "data-[range-start=true]:rounded-full data-[range-start=true]:bg-accent-press data-[range-start=true]:text-ink",
