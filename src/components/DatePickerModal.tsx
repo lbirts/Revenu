@@ -91,7 +91,7 @@ export default function DatePickerModal({
         {/* months */}
         <div
           data-testid="month-list"
-          className="no-scrollbar flex-1 overflow-y-auto overscroll-contain pb-2"
+          className="no-scrollbar flex-1 overflow-y-auto pb-2"
         >
           <Calendar
             mode="range"
