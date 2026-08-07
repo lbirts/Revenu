@@ -1,5 +1,4 @@
 import { slug } from "@/lib/utils";
-import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../assets/logo.png";
 import {
@@ -17,9 +16,13 @@ const items = [
   { to: "/settings", label: "Settings", Icon: GearIcon },
 ];
 
-export default function Sidebar() {
-  const [collapsed, setCollapsed] = useState(false);
-
+export default function Sidebar({
+  collapsed,
+  onToggle,
+}: {
+  collapsed: boolean;
+  onToggle: () => void;
+}) {
   return (
     <aside
       data-testid="sidebar"
@@ -45,7 +48,7 @@ export default function Sidebar() {
         )}
         <button
           type="button"
-          onClick={() => setCollapsed((c) => !c)}
+          onClick={onToggle}
           data-testid="sidebar-toggle"
           aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
           className="flex h-11 w-11 cursor-pointer items-center justify-center text-muted transition-colors duration-300 ease-(--ease-app) hover:text-ink"
@@ -66,7 +69,7 @@ export default function Sidebar() {
               [
                 "flex items-center gap-2 overflow-hidden whitespace-nowrap px-8 transition-colors duration-300 ease-(--ease-app)",
                 isActive
-                  ? "h-12.75 border-b border-accent text-accent drop-shadow-[0_4px_25px_rgba(44,197,131,0.8)]"
+                  ? "h-12.75 border-b border-accent text-accent drop-shadow-[0_4px_25px_rgb(44_197_131_/_var(--nav-glow))] [--nav-glow:0.8]"
                   : "h-12.5 text-muted hover:text-ink",
               ].join(" ")
             }

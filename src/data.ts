@@ -197,12 +197,23 @@ export type ReportStatus = "Published" | "Draft" | "Review";
 export const reports: {
   id: string;
   name: string;
+  summary: string;
   type: Exclude<ReportType, "All">;
   date: string;
   status: ReportStatus;
 }[] = [
   {
+    id: "RPT - 009",
+    name: "Enterprise Onboarding Funnel & Retention Deep-Dive Q1",
+    summary:
+      "Cohort-level breakdown of activation, first-value time and 90-day retention across the enterprise segment, with a companion read on how seat expansion tracks against contracted minimums for accounts onboarded since January.",
+    type: "Product",
+    date: "2026 - 03 - 18",
+    status: "Review",
+  },
+  {
     id: "RPT - 001",
+    summary: "Quarter-close revenue roll-up with segment mix and a note on deferred recognition.",
     name: "Q4 Revenue Summary",
     type: "Financial",
     date: "2026 - 03 - 31",
@@ -210,6 +221,7 @@ export const reports: {
   },
   {
     id: "RPT - 002",
+    summary: "Paid and organic acquisition for December, including blended CAC by channel.",
     name: "User Acquisition Dec",
     type: "Marketing",
     date: "2026 - 03 - 28",
@@ -217,6 +229,7 @@ export const reports: {
   },
   {
     id: "RPT - 003",
+    summary: "Session-level traffic analysis for Q4 with landing-page entry breakdown.",
     name: "Traffic Analysis Q4",
     type: "Analytics",
     date: "2026 - 02 - 25",
@@ -224,6 +237,7 @@ export const reports: {
   },
   {
     id: "RPT - 004",
+    summary: "Churn drivers ranked by contribution, with a proposed intervention shortlist.",
     name: "Churn Reduction Study",
     type: "Product",
     date: "2026 - 02 - 20",
@@ -231,6 +245,7 @@ export const reports: {
   },
   {
     id: "RPT - 005",
+    summary: "Step-by-step funnel conversion for November against the prior quarter baseline.",
     name: "Conversion Funnel Nov",
     type: "Analytics",
     date: "2026 - 02 - 18",
@@ -238,6 +253,7 @@ export const reports: {
   },
   {
     id: "RPT - 006",
+    summary: "Cloud and vendor spend against committed use, with per-service unit costs.",
     name: "Infrastructure Costs",
     type: "Financial",
     date: "2026 - 01 - 28",
@@ -245,6 +261,7 @@ export const reports: {
   },
   {
     id: "RPT - 007",
+    summary: "Mobile engagement, crash-free sessions and release-over-release adoption.",
     name: "Mobile App Metrics",
     type: "Product",
     date: "2026 - 01 - 27",
@@ -252,9 +269,66 @@ export const reports: {
   },
   {
     id: "RPT - 008",
+    summary: "Organic visibility and ranking movement for the Q3 keyword set.",
     name: "SEO Performance Q3",
     type: "Marketing",
     date: "2026 - 01 - 06",
+    status: "Published",
+  },
+  {
+    id: "RPT - 010",
+    summary: "Net revenue retention by cohort with expansion and contraction split out.",
+    name: "Net Revenue Retention FY26",
+    type: "Financial",
+    date: "2026 - 03 - 12",
+    status: "Published",
+  },
+  {
+    id: "RPT - 011",
+    summary: "Lifecycle email performance with open, click and downstream activation rates.",
+    name: "Lifecycle Email Performance",
+    type: "Marketing",
+    date: "2026 - 03 - 04",
+    status: "Published",
+  },
+  {
+    id: "RPT - 012",
+    summary: "Search and filter usage across the dashboard, with abandoned-query analysis.",
+    name: "In-App Search Behaviour",
+    type: "Analytics",
+    date: "2026 - 02 - 27",
+    status: "Draft",
+  },
+  {
+    id: "RPT - 013",
+    summary: "Feature adoption curves for the Q1 release set, segmented by plan tier.",
+    name: "Q1 Feature Adoption",
+    type: "Product",
+    date: "2026 - 02 - 14",
+    status: "Published",
+  },
+  {
+    id: "RPT - 014",
+    summary: "Gross margin by product line with cost-to-serve allocated per account.",
+    name: "Gross Margin by Product Line",
+    type: "Financial",
+    date: "2026 - 02 - 06",
+    status: "Review",
+  },
+  {
+    id: "RPT - 015",
+    summary: "Attribution comparison across first-touch, last-touch and linear models.",
+    name: "Attribution Model Comparison",
+    type: "Marketing",
+    date: "2026 - 01 - 29",
+    status: "Published",
+  },
+  {
+    id: "RPT - 016",
+    summary: "Support ticket volume and resolution time mapped against release dates.",
+    name: "Support Load vs Releases",
+    type: "Product",
+    date: "2026 - 01 - 15",
     status: "Published",
   },
 ];

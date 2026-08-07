@@ -80,6 +80,22 @@
             "at": [150, 400],
           },
         },
+        {
+          "name": "cta-hover",
+          "setup": [{ "waitForSelector": "[data-testid='page-title']" }],
+          "animation": {
+            "trigger": [{ "hover": "[data-testid='edit-timeline-btn']" }],
+            "at": [120, 600],
+          },
+        },
+        {
+          "name": "collapsing",
+          "setup": [{ "waitForSelector": "[data-testid='page-title']" }],
+          "animation": {
+            "trigger": [{ "click": "[data-testid='sidebar-toggle']" }],
+            "at": [150, 450],
+          },
+        },
       ],
       "viewports": [
         { "name": "desktop", "width": 1440, "height": 900 },
@@ -97,7 +113,18 @@
         },
         {
           "name": "breakdown-scrolled",
-          "setup": [{ "waitForSelector": "[data-testid='page-title']" }, { "scrollTo": { "y": 800 } }],
+          "setup": [
+            { "waitForSelector": "[data-testid='page-title']" },
+            { "scrollTo": { "y": 800 } },
+          ],
+        },
+        {
+          "name": "anchor-jump",
+          "setup": [
+            { "waitForSelector": "[data-testid='page-title']" },
+            { "click": "[data-testid='jump-breakdown']" },
+            { "waitMs": 600 },
+          ],
         },
       ],
       "viewports": [
@@ -121,6 +148,14 @@
             { "click": "[data-testid='report-filter-financial']" },
             { "waitForSelector": "[data-testid='report-row-rpt-006']" },
             { "waitMs": 400 },
+          ],
+        },
+        {
+          "name": "scrolled-400",
+          "setup": [
+            { "waitForSelector": "[data-testid='reports-table-head']" },
+            { "scrollTo": { "y": 400 } },
+            { "waitMs": 300 },
           ],
         },
       ],
@@ -157,6 +192,21 @@
             { "click": "[data-testid='field-time-zone-trigger']" },
             { "waitForSelector": "[data-testid='field-time-zone-options']" },
             { "waitMs": 250 },
+          ],
+        },
+        {
+          "name": "saved",
+          "setup": [
+            { "waitForSelector": "[data-testid='page-title']" },
+            {
+              "fill": {
+                "selector": "[data-testid='field-name-input']",
+                "value": "Rachel Zane",
+              },
+            },
+            { "click": "[data-testid='save-changes-btn']" },
+            { "waitForSelector": "[data-testid='saved-toast']" },
+            { "waitMs": 600 },
           ],
         },
       ],

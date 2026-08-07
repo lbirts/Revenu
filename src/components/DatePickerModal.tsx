@@ -43,7 +43,7 @@ export default function DatePickerModal({
       <DialogContent
         data-testid="date-picker"
         showCloseButton={false}
-        overlayClassName="z-40 bg-[rgba(30,32,31,0.7)] backdrop-blur-[20px] supports-backdrop-filter:backdrop-blur-[20px]"
+        overlayClassName="scrim z-40"
         className="top-38.5 right-20 left-auto z-50 flex h-174 max-h-[calc(100vh-174px)] w-90 max-w-none translate-x-0 translate-y-0 flex-col gap-0 rounded-lg border border-accent-hairline bg-panel-2 p-0 ring-0 sm:max-w-none"
       >
         <DialogTitle className="sr-only">Edit timeline</DialogTitle>
@@ -76,11 +76,11 @@ export default function DatePickerModal({
         </div>
         <div className="mt-3 border-b border-m3-divider" />
 
-        {/* weekday header (single sticky row, as in the design) */}
-        <div className="flex px-3">
+        <div data-testid="weekday-header" className="flex px-3">
           {WEEK.map((w, i) => (
             <div
               key={i}
+              data-testid={`weekday-${i}`}
               className="flex h-12 w-12 items-center justify-center text-base tracking-[0.5px] text-muted-2"
             >
               {w}
@@ -89,7 +89,10 @@ export default function DatePickerModal({
         </div>
 
         {/* months */}
-        <div className="no-scrollbar flex-1 overflow-y-auto pb-2">
+        <div
+          data-testid="month-list"
+          className="no-scrollbar flex-1 overflow-y-auto overscroll-contain pb-2"
+        >
           <Calendar
             mode="range"
             selected={draft}

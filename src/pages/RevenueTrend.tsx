@@ -63,11 +63,18 @@ export default function RevenueTrend({
         ))}
       </div>
 
-      <ChartCard title="Revenue vs Expenses" range={label}>
-        <BarsChart data={inTimeline(revExpBars, timeline)} />
-      </ChartCard>
+      <div data-anchor-section id="revenue-vs-expenses" className="scroll-mt-18">
+        <ChartCard title="Revenue vs Expenses" range={label}>
+          <BarsChart data={inTimeline(revExpBars, timeline)} />
+        </ChartCard>
+      </div>
 
-      <div data-testid="breakdown-card" className="rounded-lg bg-panel px-5.5 py-6">
+      <div
+        data-testid="breakdown-card"
+        data-anchor-section
+        id="monthly-breakdown"
+        className="scroll-mt-18 rounded-lg bg-panel px-5.5 py-6"
+      >
         <h3
           data-testid="breakdown-card-title"
           className="text-2xl font-semibold leading-7 text-ink"
@@ -75,11 +82,13 @@ export default function RevenueTrend({
           Monthly Breakdown
         </h3>
         <div data-testid="breakdown-table" className="mt-4 flex flex-col gap-4">
-          <Row
-            testId="breakdown-head"
-            cells={["Month", "Revenue", "Expenses", "Profit", "Margin"]}
-            colors={Array(5).fill("text-muted")}
-          />
+          <div className="sticky top-0 z-10 bg-panel pb-3 shadow-[0_1px_0_var(--color-hairline)]">
+            <Row
+              testId="breakdown-head"
+              cells={["Month", "Revenue", "Expenses", "Profit", "Margin"]}
+              colors={Array(5).fill("text-muted")}
+            />
+          </div>
           {inTimeline(monthlyBreakdown, timeline).map((r) => (
             <Row
               key={r.month}

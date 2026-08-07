@@ -1,3 +1,629 @@
 {
-  "defects": [],
+  "clusters": [
+    {
+      "id": "inert-styling",
+      "defects": [
+        "tone-query-self-scoped",
+        "status-layer-demotion",
+        "nav-glow-type-mismatch",
+        "has-combinator-drift",
+        "supports-branch-inversion",
+        "relative-color-channel",
+        "muted-contrast-drift",
+        "select-variant-reassert"
+      ]
+    },
+    {
+      "id": "scroll-geometry",
+      "defects": [
+        "sticky-scrollport-severed",
+        "fixed-captured-by-scroller",
+        "dialog-maxheight-viewport-clamp",
+        "breakdown-sticky-clipped",
+        "sticky-head-transparent",
+        "overscroll-chain-leak"
+      ]
+    },
+    {
+      "id": "measure-mismatch",
+      "defects": [
+        "day-cell-min-width-reassert",
+        "report-name-track-narrowed",
+        "clamp-half-failure",
+        "range-cap-side-swap",
+        "dialog-padding-reassert",
+        "breakdown-cell-align",
+        "weekday-header-column-drift"
+      ]
+    },
+    {
+      "id": "frame-truth",
+      "defects": [
+        "transition-property-narrowed",
+        "fill-mode-snapback",
+        "skeleton-animation-paused",
+        "ease-curve-linearized",
+        "collapse-duration",
+        "dialog-enter-duration",
+        "toggle-state-paint-split"
+      ]
+    },
+    {
+      "id": "cascade-blast",
+      "defects": [
+        "compiled-utility-repoint",
+        "subtree-token-shadow",
+        "hairline-shared",
+        "donut-sector-invisible",
+        "color-scheme-dropped",
+        "daypicker-classnames-key"
+      ]
+    }
+  ],
+  "defects": [
+    {
+      "id": "tone-query-self-scoped",
+      "file": "src/components/StatCard.tsx",
+      "change": "Move the `--tone` custom property off the card root and onto the delta element itself.",
+      "route": "overview",
+      "state": "default",
+      "checks": [
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='stat-card-conversion-delta']",
+          "property": "color",
+          "expected": "rgb(255, 114, 133)"
+        },
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='stat-card-total-revenue-delta']",
+          "property": "color",
+          "expected": "rgb(36, 233, 187)"
+        }
+      ]
+    },
+    {
+      "id": "status-layer-demotion",
+      "file": "src/index.css",
+      "change": "Append an unlayered `[data-status=\"Review\"] { color: var(--color-ink); }` rule. Unlayered declarations outrank every cascade layer, so the Tailwind `data-[status=Review]:text-amber` utility is silently defeated.",
+      "route": "reports",
+      "state": "default",
+      "checks": [
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='report-row-rpt-009-status']",
+          "property": "color",
+          "expected": "rgb(250, 164, 78)"
+        },
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='report-row-rpt-001-status']",
+          "property": "color",
+          "expected": "rgb(36, 233, 187)"
+        }
+      ]
+    },
+    {
+      "id": "nav-glow-type-mismatch",
+      "file": "src/components/Sidebar.tsx",
+      "change": "Change the active link's `[--nav-glow:0.8]` to `[--nav-glow:80%]`. The registered `@property` declares `syntax: \"<number>\"`, so a percentage is rejected and falls back to `initial-value: 0`.",
+      "route": "overview",
+      "state": "default",
+      "checks": [
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='nav-link-overview']",
+          "property": "filter",
+          "expected": "drop-shadow(rgba(44, 197, 131, 0.8) 0px 4px 25px)"
+        }
+      ]
+    },
+    {
+      "id": "has-combinator-drift",
+      "file": "src/pages/Settings.tsx",
+      "change": "Change `has-data-checked:border-l-accent` to `has-[>[data-checked]]:border-l-accent` on the notification row. The switch sits one level deeper, so the child combinator never matches and the accent rail never paints.",
+      "route": "settings",
+      "state": "default",
+      "checks": [
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='notification-row-income']",
+          "property": "border-left-color",
+          "expected": "rgb(36, 233, 187)"
+        },
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='notification-row-payments']",
+          "property": "border-left-color",
+          "expected": "rgba(0, 0, 0, 0)"
+        }
+      ]
+    },
+    {
+      "id": "supports-branch-inversion",
+      "file": "src/index.css",
+      "change": "Put the no-backdrop-filter fallback inside the positive `@supports (backdrop-filter: blur(1px))` branch: `background: rgb(30 32 31 / 0.94); backdrop-filter: none;`.",
+      "route": "overview",
+      "state": "timeline-open",
+      "checks": [
+        {
+          "type": "computed-style",
+          "selector": ".scrim",
+          "property": "backdrop-filter",
+          "expected": "blur(20px)"
+        },
+        {
+          "type": "computed-style",
+          "selector": ".scrim",
+          "property": "background-color",
+          "expected": "rgba(30, 32, 31, 0.7)"
+        }
+      ]
+    },
+    {
+      "id": "relative-color-channel",
+      "file": "src/components/GlowButton.tsx",
+      "change": "In the hover utility `hover:bg-[oklch(from_var(--color-accent)_calc(l_-_0.28)_c_h)]`, move the delta onto the chroma channel: `calc(c_-_0.28)`. The hover fill desaturates to grey while keeping correct lightness.",
+      "route": "overview",
+      "state": "cta-hover",
+      "checks": [
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='edit-timeline-btn']",
+          "property": "background-color",
+          "expected": "oklch(0.553992 0.157911 171.097)"
+        }
+      ]
+    },
+    {
+      "id": "muted-contrast-drift",
+      "file": "src/index.css",
+      "change": "Change `--color-muted` from `#86868c` to `#7c7c82`, dropping contrast from 4.53 to 4.06 and crossing the AA floor.",
+      "route": "reports",
+      "state": "default",
+      "checks": [
+        {
+          "type": "axe-rule",
+          "rule": "color-contrast"
+        }
+      ]
+    },
+    {
+      "id": "select-variant-reassert",
+      "file": "src/components/TextField.tsx",
+      "change": "Delete `data-[size=default]:h-14` from the SelectTrigger consumer class string. tailwind-merge stops overriding, so the vendored `data-[size=default]:h-8` re-asserts and the trigger collapses.",
+      "route": "settings",
+      "state": "default",
+      "checks": [
+        {
+          "type": "bounding-box",
+          "selector": "[data-testid='field-time-zone-trigger']",
+          "property": "height",
+          "expected": 56,
+          "tolerance": 1
+        }
+      ]
+    },
+    {
+      "id": "sticky-scrollport-severed",
+      "file": "src/components/Page.tsx",
+      "change": "Add `overflow-x-hidden` to the page wrapper. Any overflow value other than `visible` makes it a scroll container, so the sticky head anchors to it instead of `main` and stops sticking.",
+      "route": "reports",
+      "state": "scrolled-400",
+      "checks": [
+        {
+          "type": "bounding-box",
+          "selector": "[data-testid='reports-table-head']",
+          "property": "top",
+          "relativeTo": "[data-testid='main']",
+          "expected": 8,
+          "tolerance": 2
+        }
+      ]
+    },
+    {
+      "id": "fixed-captured-by-scroller",
+      "file": "src/App.tsx",
+      "change": "Add `will-change-transform` to `main`. That creates a containing block, capturing the `position: fixed` scroll-to-top control so it drifts with scroll.",
+      "route": "reports",
+      "state": "scrolled-400",
+      "checks": [
+        {
+          "type": "bounding-box",
+          "selector": "[data-testid='scroll-top']",
+          "property": "bottom",
+          "relativeTo": "viewport",
+          "expected": 40,
+          "tolerance": 2
+        }
+      ]
+    },
+    {
+      "id": "dialog-maxheight-viewport-clamp",
+      "file": "src/components/DatePickerModal.tsx",
+      "change": "Delete `max-h-[calc(100vh-174px)]` from the DialogContent class string, leaving only `h-174`. At 1440x900 the clamp never engages (726 > 696) so the modal is pixel-identical; at 1280x800 the modal grows from 626px to 696px, overflowing the viewport by 50px and pushing the Clear/Cancel/OK footer off-screen.",
+      "route": "overview",
+      "state": "timeline-open",
+      "checks": [
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='date-picker']",
+          "property": "max-height",
+          "expected": "626px"
+        },
+        {
+          "type": "bounding-box",
+          "selector": "[data-testid='date-picker-clear']",
+          "property": "bottom",
+          "relativeTo": "viewport",
+          "expected": 20,
+          "tolerance": 6
+        }
+      ]
+    },
+    {
+      "id": "breakdown-sticky-clipped",
+      "file": "src/pages/RevenueTrend.tsx",
+      "change": "Add `overflow-hidden` to the Monthly Breakdown card (a natural-looking edit to clip its rounded corners). That makes the card a scroll container, so its sticky head anchors to the card instead of `main` and stops sticking.",
+      "route": "revenue-trend",
+      "state": "breakdown-scrolled",
+      "checks": [
+        {
+          "type": "bounding-box",
+          "selector": "[data-testid='breakdown-head']",
+          "property": "top",
+          "relativeTo": "[data-testid='main']",
+          "expected": 8,
+          "tolerance": 3
+        }
+      ]
+    },
+    {
+      "id": "sticky-head-transparent",
+      "file": "src/pages/Reports.tsx",
+      "change": "Delete `bg-panel` from the sticky table head. At rest the page is identical; once scrolled, rows travel visibly through the header text.",
+      "route": "reports",
+      "state": "scrolled-400",
+      "checks": [
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='reports-table-head']",
+          "property": "background-color",
+          "expected": "rgb(30, 32, 31)"
+        }
+      ]
+    },
+    {
+      "id": "overscroll-chain-leak",
+      "file": "src/components/DatePickerModal.tsx",
+      "change": "Delete `overscroll-contain` from the month-list scroller. Scrolling past the end of the list silently scrolls the page behind the open modal.",
+      "route": "overview",
+      "state": "timeline-open",
+      "checks": [
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='month-list']",
+          "property": "overscroll-behavior-y",
+          "expected": "contain"
+        }
+      ]
+    },
+    {
+      "id": "day-cell-min-width-reassert",
+      "file": "src/components/DatePickerModal.tsx",
+      "change": "Delete `min-w-0` from the `day_button` class list. The vendored `min-w-(--cell-size)` re-asserts and the range band overflows its row.",
+      "route": "overview",
+      "state": "timeline-open",
+      "checks": [
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='day-2026-01-09']",
+          "property": "min-width",
+          "expected": "0px"
+        }
+      ]
+    },
+    {
+      "id": "report-name-track-narrowed",
+      "file": "src/pages/Reports.tsx",
+      "change": "Change the row grid to `grid-cols-[1fr_1fr_2fr_1fr_1fr]` while leaving the head at `1fr_2fr_2fr_1fr_1fr`. Head and body desynchronise and the long report name truncates 91px early.",
+      "route": "reports",
+      "state": "default",
+      "checks": [
+        {
+          "type": "bounding-box",
+          "selector": "[data-testid='report-row-rpt-009'] > *:nth-child(2)",
+          "property": "width",
+          "expected": 273,
+          "tolerance": 4
+        }
+      ]
+    },
+    {
+      "id": "clamp-half-failure",
+      "file": "src/index.css",
+      "change": "Remove only `overflow: hidden` from `.report-summary`, leaving the other two clamp declarations. The box still reports two lines and the ellipsis still renders, but the remaining text paints outside it over the next row.",
+      "route": "reports",
+      "state": "default",
+      "checks": [
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='report-row-rpt-009-summary']",
+          "property": "overflow",
+          "expected": "hidden"
+        }
+      ]
+    },
+    {
+      "id": "range-cap-side-swap",
+      "file": "src/components/DatePickerModal.tsx",
+      "change": "Swap the range cap pseudo-elements: give range_start `after:left-0 after:right-1/2` and range_end `after:left-1/2 after:right-0`. Both caps then point outward, detaching from the middle run and overhanging past the selection.",
+      "route": "overview",
+      "state": "timeline-saved",
+      "checks": [
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='day-2026-01-05']::after",
+          "property": "left",
+          "expected": "24px"
+        },
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='day-2026-01-05']::after",
+          "property": "right",
+          "expected": "0px"
+        }
+      ]
+    },
+    {
+      "id": "dialog-padding-reassert",
+      "file": "src/components/DatePickerModal.tsx",
+      "change": "Delete `p-0` from the DialogContent class string. The vendored `p-4` re-asserts and the calendar gains a 16px inset.",
+      "route": "overview",
+      "state": "timeline-open",
+      "checks": [
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='date-picker']",
+          "property": "padding",
+          "expected": "0px"
+        }
+      ]
+    },
+    {
+      "id": "breakdown-cell-align",
+      "file": "src/pages/RevenueTrend.tsx",
+      "change": "In the `cellAlign` array change the Margin column from `text-right` to `text-center`.",
+      "route": "revenue-trend",
+      "state": "default",
+      "checks": [
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='breakdown-row-jan'] > *:nth-child(5)",
+          "property": "text-align",
+          "expected": "right"
+        }
+      ]
+    },
+    {
+      "id": "transition-property-narrowed",
+      "file": "src/components/GlowButton.tsx",
+      "change": "Narrow the transition from the full property list to `filter` only. Rest and settled frames are identical; only mid-transition frames differ, with colour snapping while the glow eases.",
+      "route": "overview",
+      "state": "cta-hover",
+      "checks": [
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='edit-timeline-btn']",
+          "property": "transition-property",
+          "expected": "background-color, border-color, filter, color"
+        }
+      ]
+    },
+    {
+      "id": "fill-mode-snapback",
+      "file": "src/index.css",
+      "change": "Change `.boot-rise`'s animation fill mode from `both` to `none`. The entrance plays correctly, then the content erases itself back to the base `opacity: 0` when the animation ends.",
+      "route": "overview",
+      "state": "default",
+      "checks": [
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='page-content']",
+          "property": "opacity",
+          "expected": "1"
+        },
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='page-content']",
+          "property": "animation-fill-mode",
+          "expected": "both"
+        }
+      ]
+    },
+    {
+      "id": "skeleton-animation-paused",
+      "file": "src/index.css",
+      "change": "Append `.react-loading-skeleton { animation-play-state: paused; }` to index.css. The shimmer keyframes still exist and the bones still render, but the sweep never advances.",
+      "route": "overview",
+      "state": "loading",
+      "checks": [
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='home-skeleton'] .react-loading-skeleton",
+          "property": "animation-play-state",
+          "expected": "running"
+        }
+      ]
+    },
+    {
+      "id": "ease-curve-linearized",
+      "file": "src/index.css",
+      "change": "Change `--ease-app` from `cubic-bezier(0, 0, 0.58, 1)` to `linear`. Every transition still starts and ends at identical values; only the interpolation between them changes.",
+      "route": "overview",
+      "state": "cta-hover",
+      "checks": [
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='edit-timeline-btn']",
+          "property": "transition-timing-function",
+          "expected": "cubic-bezier(0, 0, 0.58, 1)"
+        }
+      ]
+    },
+    {
+      "id": "collapse-duration",
+      "file": "src/components/Sidebar.tsx",
+      "change": "Change the sidebar collapse transition from `duration-300` to `duration-700`.",
+      "route": "overview",
+      "state": "collapsing",
+      "checks": [
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='sidebar']",
+          "property": "transition-duration",
+          "expected": "0.3s"
+        }
+      ]
+    },
+    {
+      "id": "dialog-enter-duration",
+      "file": "src/components/ui/dialog.tsx",
+      "change": "Change the vendored DialogContent enter animation from `duration-100` to `duration-600`.",
+      "route": "overview",
+      "state": "timeline-open",
+      "checks": [
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='date-picker']",
+          "property": "animation-duration",
+          "expected": "0.1s"
+        }
+      ]
+    },
+    {
+      "id": "toggle-state-paint-split",
+      "file": "src/components/Toggle.tsx",
+      "change": "Bind the thumb's `translate-x-5` to a different condition than the track colour, so the track paints on and the switch reports checked while the knob sits in the off position.",
+      "route": "settings",
+      "state": "default",
+      "checks": [
+        {
+          "type": "bounding-box",
+          "selector": "[data-testid='notification-toggle-income-thumb']",
+          "property": "left",
+          "relativeTo": "[data-testid='notification-toggle-income']",
+          "expected": 22,
+          "tolerance": 2
+        }
+      ]
+    },
+    {
+      "id": "compiled-utility-repoint",
+      "file": "src/index.css",
+      "change": "Repoint `--color-panel` from `var(--surface-raised)` to `var(--surface-sunken)`. Cards and sidebar drop one tier while the modal/popover tier stays put, so two surfaces that should differ now match.",
+      "route": "overview",
+      "state": "default",
+      "checks": [
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='traffic-card']",
+          "property": "background-color",
+          "expected": "rgb(30, 32, 31)"
+        }
+      ]
+    },
+    {
+      "id": "subtree-token-shadow",
+      "file": "src/components/ChartCard.tsx",
+      "change": "Add `[--color-panel:#212423]` to the chart card wrapper, shadowing the token for that subtree only so chart cards drift while stat cards do not.",
+      "route": "overview",
+      "state": "default",
+      "checks": [
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='chart-card-revenue-trend']",
+          "property": "background-color",
+          "expected": "rgb(30, 32, 31)"
+        }
+      ]
+    },
+    {
+      "id": "hairline-shared",
+      "file": "src/index.css",
+      "change": "Change `--color-hairline` from `rgb(134 134 140 / 0.08)` to `rgb(148 163 184 / 0.08)`. Sub-threshold on any single surface, additive across card hairlines and chart grid together.",
+      "route": "overview",
+      "state": "default",
+      "checks": [
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='chart-card-revenue-trend']",
+          "property": "border-color",
+          "expected": "rgba(134, 134, 140, 0.08)"
+        }
+      ]
+    },
+    {
+      "id": "donut-sector-invisible",
+      "file": "src/data.ts",
+      "change": "Change the Email sector colour in `traffic` from `#034e42` to the panel background `#1e201f`. The sector keeps its geometry and legend entry but disappears against the card.",
+      "route": "overview",
+      "state": "default",
+      "checks": [
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='traffic-card'] .recharts-pie-sector:nth-of-type(1) path",
+          "property": "fill",
+          "expected": "rgb(3, 78, 66)"
+        }
+      ]
+    },
+    {
+      "id": "color-scheme-dropped",
+      "file": "src/index.css",
+      "change": "Delete `color-scheme: dark` from `:root`. Native scrollbars and form controls render light against the dark panels.",
+      "route": "overview",
+      "state": "timeline-open",
+      "checks": [
+        {
+          "type": "computed-style",
+          "selector": "html",
+          "property": "color-scheme",
+          "expected": "dark"
+        }
+      ]
+    },
+    {
+      "id": "daypicker-classnames-key",
+      "file": "src/components/DatePickerModal.tsx",
+      "change": "Rebind the range-band styling from the `range_middle` key to the `disabled` key in the Calendar `classNames` map. Both are valid keys so TypeScript stays silent, but no day in this calendar is ever disabled, so the class never applies: the connecting band vanishes while the start and end caps still render from their own keys.",
+      "route": "overview",
+      "state": "timeline-saved",
+      "checks": [
+        {
+          "type": "computed-style",
+          "selector": "[data-testid='day-2026-01-09']",
+          "property": "background-color",
+          "expected": "rgb(64, 72, 70)"
+        }
+      ]
+    },
+    {
+      "id": "weekday-header-column-drift",
+      "file": "src/components/DatePickerModal.tsx",
+      "change": "Change the date-picker weekday header cells from `w-12` to `w-11`. The header row no longer tracks the 48px day-grid columns, so the letters desync cumulatively - the first is 2px off and Saturday is 24px off, sitting almost a full column left of the days it labels.",
+      "route": "overview",
+      "state": "timeline-open",
+      "checks": [
+        {
+          "type": "bounding-box",
+          "selector": "[data-testid='weekday-6']",
+          "property": "left",
+          "relativeTo": "[data-testid='weekday-header']",
+          "expected": 298,
+          "tolerance": 3
+        }
+      ]
+    }
+  ]
 }

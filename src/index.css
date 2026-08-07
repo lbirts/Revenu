@@ -3,12 +3,22 @@
 @import "shadcn/tailwind.css";
 @custom-variant dark (&:is(.dark *));
 
+:root {
+  color-scheme: dark;
+
+  --grey-panel: #1e201f;
+  --grey-panel-raised: #191b1a;
+
+  --surface-sunken: var(--grey-panel-raised);
+  --surface-raised: var(--grey-panel);
+}
+
 @theme {
   --font-sans: "Roboto", system-ui, -apple-system, sans-serif;
 
-  --color-bg: #141514; /* content background */
-  --color-panel: #1e201f; /* sidebar + cards */
-  --color-panel-2: #191b1a; /* modal + skeleton background */
+  --color-bg: #141514;
+  --color-panel: var(--surface-raised);
+  --color-panel-2: var(--surface-sunken);
   --color-ink: #ffffff;
   --color-muted: #86868c; /* secondary text */
   --color-muted-2: #89898e; /* disabled / placeholder */
@@ -28,7 +38,6 @@
   --color-accent-hairline: rgb(35 231 184 / 0.08); /* modal border */
 }
 
-/* 300ms ease-out on every hover transition */
 :root {
   --ease-app: cubic-bezier(0, 0, 0.58, 1);
   --shadow-glow-btn: 0 0 24px rgb(44 197 131 / 0.48); /* #2cc5837a */
@@ -84,17 +93,58 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* sonner custom toasts: assert the resting transform (enter transition can stall) */
-[data-sonner-toast][data-mounted="true"][data-removed="false"] {
-  transform: var(--y);
-}
-
-/* Hide scrollbar inside the date-picker month list (design shows none) */
 .no-scrollbar {
   scrollbar-width: none;
 }
 .no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+@container style(--tone: down) {
+  .stat-delta {
+    color: var(--color-negative);
+  }
+}
+
+@property --nav-glow {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+@supports (backdrop-filter: blur(1px)) {
+  .scrim {
+    background: rgb(30 32 31 / 0.7);
+    backdrop-filter: blur(20px);
+  }
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .scrim {
+    background: rgb(30 32 31 / 0.94);
+  }
+}
+
+.report-summary {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@keyframes boot-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.boot-rise {
+  opacity: 0;
+  animation: boot-rise 600ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
 }
 /*
   ---break---

@@ -57,7 +57,10 @@ export default function Settings() {
         subtitle="Manage your personal information and preferences"
       />
 
-      <div data-testid="profile-card" className="rounded-lg bg-panel px-5.5 py-6">
+      <div
+        data-testid="profile-card"
+        className="rounded-lg bg-panel px-5.5 py-6"
+      >
         <h3
           data-testid="profile-card-title"
           className="text-2xl font-semibold leading-7 text-ink"
@@ -109,9 +112,9 @@ export default function Settings() {
             <div
               key={n.key}
               data-testid={`notification-row-${n.key}`}
-              className={`flex h-13.5 items-center justify-between ${
+              className={`flex h-13.5 items-center justify-between border-l-2 border-l-transparent pl-3 has-data-checked:border-l-accent ${
                 i < defaultNotifications.length - 1
-                  ? "border-b border-input-border"
+                  ? "border-b border-b-input-border"
                   : ""
               }`}
             >
