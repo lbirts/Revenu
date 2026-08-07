@@ -25,7 +25,7 @@ export default function GlowButton({
         "inline-flex items-center justify-center gap-2 rounded-lg border-2 px-5.5",
         icon ? "h-15" : "h-13.75",
         "text-base font-medium leading-none",
-        "transition-[background-color,border-color,filter,color] duration-300 ease-(--ease-app)",
+        "transition-[filter] duration-300 ease-(--ease-app)",
         disabled
           ? "cursor-default border-muted-2 text-muted-2"
           : "cursor-pointer border-accent text-ink drop-shadow-[0_0_24px_rgba(44,197,131,0.48)] hover:bg-[oklch(from_var(--color-accent)_calc(l_-_0.28)_c_h)]",
