@@ -15,7 +15,7 @@ export default function ChartCard({
   return (
     <div
       data-testid={`chart-card-${id}`}
-      className="relative h-80 rounded-lg bg-panel p-6"
+      className="relative h-80 rounded-lg bg-panel p-6 [--color-panel:#212423]"
     >
       <div className="pointer-events-none relative z-10 flex items-start justify-between">
         <h3
