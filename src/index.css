@@ -144,7 +144,7 @@ body {
 
 .boot-rise {
   opacity: 0;
-  animation: boot-rise 600ms cubic-bezier(0.22, 1, 0.36, 1) 120ms both;
+  animation: boot-rise 600ms cubic-bezier(0.22, 1, 0.36, 1) 120ms none;
 }
 /*
   ---break---
