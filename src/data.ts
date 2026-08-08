@@ -15,8 +15,6 @@ export const MONTHS = [
 
 /* ---------- Monthly figures ---------- */
 
-/* Every stat card and revenue chart reads from this one table, so the
-   dashboard can't contradict itself when the timeline narrows. */
 export type MonthRow = {
   key: string;
   month: string;
@@ -30,18 +28,138 @@ export type MonthRow = {
 };
 
 export const months: MonthRow[] = [
-  { key: "2026-01", month: "Jan", revenue: 43600, activeRate: 28.4, conversion: 3.62, sessionSeconds: 228, mrr: 52.0, arpu: 21.4, churn: 2.6 },
-  { key: "2026-02", month: "Feb", revenue: 50700, activeRate: 29.1, conversion: 3.55, sessionSeconds: 232, mrr: 55.4, arpu: 21.9, churn: 2.5 },
-  { key: "2026-03", month: "Mar", revenue: 60000, activeRate: 30.2, conversion: 3.48, sessionSeconds: 236, mrr: 58.2, arpu: 22.4, churn: 2.42 },
-  { key: "2026-04", month: "Apr", revenue: 69300, activeRate: 31.0, conversion: 3.4, sessionSeconds: 240, mrr: 60.6, arpu: 22.9, churn: 2.32 },
-  { key: "2026-05", month: "May", revenue: 53600, activeRate: 30.6, conversion: 3.33, sessionSeconds: 244, mrr: 62.4, arpu: 23.4, churn: 2.24 },
-  { key: "2026-06", month: "Jun", revenue: 61400, activeRate: 31.8, conversion: 3.26, sessionSeconds: 248, mrr: 64.0, arpu: 23.9, churn: 2.14 },
-  { key: "2026-07", month: "Jul", revenue: 69300, activeRate: 32.4, conversion: 3.2, sessionSeconds: 252, mrr: 66.2, arpu: 24.4, churn: 2.06 },
-  { key: "2026-08", month: "Aug", revenue: 82900, activeRate: 33.1, conversion: 3.14, sessionSeconds: 256, mrr: 68.4, arpu: 24.9, churn: 1.98 },
-  { key: "2026-09", month: "Sep", revenue: 92900, activeRate: 34.2, conversion: 3.08, sessionSeconds: 260, mrr: 70.6, arpu: 25.4, churn: 1.9 },
-  { key: "2026-10", month: "Oct", revenue: 90700, activeRate: 35.0, conversion: 3.02, sessionSeconds: 264, mrr: 72.8, arpu: 25.9, churn: 1.82 },
-  { key: "2026-11", month: "Nov", revenue: 70000, activeRate: 34.6, conversion: 2.96, sessionSeconds: 268, mrr: 74.4, arpu: 26.4, churn: 1.74 },
-  { key: "2026-12", month: "Dec", revenue: 103600, activeRate: 36.0, conversion: 2.84, sessionSeconds: 296, mrr: 80.0, arpu: 27.26, churn: 1.48 },
+  {
+    key: "2026-01",
+    month: "Jan",
+    revenue: 43600,
+    activeRate: 28.4,
+    conversion: 3.62,
+    sessionSeconds: 228,
+    mrr: 52.0,
+    arpu: 21.4,
+    churn: 2.6,
+  },
+  {
+    key: "2026-02",
+    month: "Feb",
+    revenue: 50700,
+    activeRate: 29.1,
+    conversion: 3.55,
+    sessionSeconds: 232,
+    mrr: 55.4,
+    arpu: 21.9,
+    churn: 2.5,
+  },
+  {
+    key: "2026-03",
+    month: "Mar",
+    revenue: 60000,
+    activeRate: 30.2,
+    conversion: 3.48,
+    sessionSeconds: 236,
+    mrr: 58.2,
+    arpu: 22.4,
+    churn: 2.42,
+  },
+  {
+    key: "2026-04",
+    month: "Apr",
+    revenue: 69300,
+    activeRate: 31.0,
+    conversion: 3.4,
+    sessionSeconds: 240,
+    mrr: 60.6,
+    arpu: 22.9,
+    churn: 2.32,
+  },
+  {
+    key: "2026-05",
+    month: "May",
+    revenue: 53600,
+    activeRate: 30.6,
+    conversion: 3.33,
+    sessionSeconds: 244,
+    mrr: 62.4,
+    arpu: 23.4,
+    churn: 2.24,
+  },
+  {
+    key: "2026-06",
+    month: "Jun",
+    revenue: 61400,
+    activeRate: 31.8,
+    conversion: 3.26,
+    sessionSeconds: 248,
+    mrr: 64.0,
+    arpu: 23.9,
+    churn: 2.14,
+  },
+  {
+    key: "2026-07",
+    month: "Jul",
+    revenue: 69300,
+    activeRate: 32.4,
+    conversion: 3.2,
+    sessionSeconds: 252,
+    mrr: 66.2,
+    arpu: 24.4,
+    churn: 2.06,
+  },
+  {
+    key: "2026-08",
+    month: "Aug",
+    revenue: 82900,
+    activeRate: 33.1,
+    conversion: 3.14,
+    sessionSeconds: 256,
+    mrr: 68.4,
+    arpu: 24.9,
+    churn: 1.98,
+  },
+  {
+    key: "2026-09",
+    month: "Sep",
+    revenue: 92900,
+    activeRate: 34.2,
+    conversion: 3.08,
+    sessionSeconds: 260,
+    mrr: 70.6,
+    arpu: 25.4,
+    churn: 1.9,
+  },
+  {
+    key: "2026-10",
+    month: "Oct",
+    revenue: 90700,
+    activeRate: 35.0,
+    conversion: 3.02,
+    sessionSeconds: 264,
+    mrr: 72.8,
+    arpu: 25.9,
+    churn: 1.82,
+  },
+  {
+    key: "2026-11",
+    month: "Nov",
+    revenue: 70000,
+    activeRate: 34.6,
+    conversion: 2.96,
+    sessionSeconds: 268,
+    mrr: 74.4,
+    arpu: 26.4,
+    churn: 1.74,
+  },
+  {
+    key: "2026-12",
+    month: "Dec",
+    revenue: 103600,
+    activeRate: 36.0,
+    conversion: 2.84,
+    sessionSeconds: 296,
+    mrr: 80.0,
+    arpu: 27.26,
+    churn: 1.48,
+  },
 ];
 
 export const revenueSeries = (rows: MonthRow[]) =>
@@ -213,7 +331,8 @@ export const reports: {
   },
   {
     id: "RPT - 001",
-    summary: "Quarter-close revenue roll-up with segment mix and a note on deferred recognition.",
+    summary:
+      "Quarter-close revenue roll-up with segment mix and a note on deferred recognition.",
     name: "Q4 Revenue Summary",
     type: "Financial",
     date: "2026 - 03 - 31",
@@ -221,7 +340,8 @@ export const reports: {
   },
   {
     id: "RPT - 002",
-    summary: "Paid and organic acquisition for December, including blended CAC by channel.",
+    summary:
+      "Paid and organic acquisition for December, including blended CAC by channel.",
     name: "User Acquisition Dec",
     type: "Marketing",
     date: "2026 - 03 - 28",
@@ -229,7 +349,8 @@ export const reports: {
   },
   {
     id: "RPT - 003",
-    summary: "Session-level traffic analysis for Q4 with landing-page entry breakdown.",
+    summary:
+      "Session-level traffic analysis for Q4 with landing-page entry breakdown.",
     name: "Traffic Analysis Q4",
     type: "Analytics",
     date: "2026 - 02 - 25",
@@ -237,7 +358,8 @@ export const reports: {
   },
   {
     id: "RPT - 004",
-    summary: "Churn drivers ranked by contribution, with a proposed intervention shortlist.",
+    summary:
+      "Churn drivers ranked by contribution, with a proposed intervention shortlist.",
     name: "Churn Reduction Study",
     type: "Product",
     date: "2026 - 02 - 20",
@@ -245,7 +367,8 @@ export const reports: {
   },
   {
     id: "RPT - 005",
-    summary: "Step-by-step funnel conversion for November against the prior quarter baseline.",
+    summary:
+      "Step-by-step funnel conversion for November against the prior quarter baseline.",
     name: "Conversion Funnel Nov",
     type: "Analytics",
     date: "2026 - 02 - 18",
@@ -253,7 +376,8 @@ export const reports: {
   },
   {
     id: "RPT - 006",
-    summary: "Cloud and vendor spend against committed use, with per-service unit costs.",
+    summary:
+      "Cloud and vendor spend against committed use, with per-service unit costs.",
     name: "Infrastructure Costs",
     type: "Financial",
     date: "2026 - 01 - 28",
@@ -261,7 +385,8 @@ export const reports: {
   },
   {
     id: "RPT - 007",
-    summary: "Mobile engagement, crash-free sessions and release-over-release adoption.",
+    summary:
+      "Mobile engagement, crash-free sessions and release-over-release adoption.",
     name: "Mobile App Metrics",
     type: "Product",
     date: "2026 - 01 - 27",
@@ -277,7 +402,8 @@ export const reports: {
   },
   {
     id: "RPT - 010",
-    summary: "Net revenue retention by cohort with expansion and contraction split out.",
+    summary:
+      "Net revenue retention by cohort with expansion and contraction split out.",
     name: "Net Revenue Retention FY26",
     type: "Financial",
     date: "2026 - 03 - 12",
@@ -285,7 +411,8 @@ export const reports: {
   },
   {
     id: "RPT - 011",
-    summary: "Lifecycle email performance with open, click and downstream activation rates.",
+    summary:
+      "Lifecycle email performance with open, click and downstream activation rates.",
     name: "Lifecycle Email Performance",
     type: "Marketing",
     date: "2026 - 03 - 04",
@@ -293,7 +420,8 @@ export const reports: {
   },
   {
     id: "RPT - 012",
-    summary: "Search and filter usage across the dashboard, with abandoned-query analysis.",
+    summary:
+      "Search and filter usage across the dashboard, with abandoned-query analysis.",
     name: "In-App Search Behaviour",
     type: "Analytics",
     date: "2026 - 02 - 27",
@@ -301,7 +429,8 @@ export const reports: {
   },
   {
     id: "RPT - 013",
-    summary: "Feature adoption curves for the Q1 release set, segmented by plan tier.",
+    summary:
+      "Feature adoption curves for the Q1 release set, segmented by plan tier.",
     name: "Q1 Feature Adoption",
     type: "Product",
     date: "2026 - 02 - 14",
@@ -309,7 +438,8 @@ export const reports: {
   },
   {
     id: "RPT - 014",
-    summary: "Gross margin by product line with cost-to-serve allocated per account.",
+    summary:
+      "Gross margin by product line with cost-to-serve allocated per account.",
     name: "Gross Margin by Product Line",
     type: "Financial",
     date: "2026 - 02 - 06",
@@ -317,7 +447,8 @@ export const reports: {
   },
   {
     id: "RPT - 015",
-    summary: "Attribution comparison across first-touch, last-touch and linear models.",
+    summary:
+      "Attribution comparison across first-touch, last-touch and linear models.",
     name: "Attribution Model Comparison",
     type: "Marketing",
     date: "2026 - 01 - 29",
@@ -325,7 +456,8 @@ export const reports: {
   },
   {
     id: "RPT - 016",
-    summary: "Support ticket volume and resolution time mapped against release dates.",
+    summary:
+      "Support ticket volume and resolution time mapped against release dates.",
     name: "Support Load vs Releases",
     type: "Product",
     date: "2026 - 01 - 15",

@@ -45,6 +45,13 @@ export default function Settings() {
   const set = <K extends keyof Form>(k: K, v: Form[K]) =>
     setForm((f) => ({ ...f, [k]: v }));
 
+  /* Notification switches apply on toggle, so they never make the form dirty. */
+  const setNotif = (i: number, v: boolean) => {
+    const notifs = form.notifs.map((x, j) => (j === i ? v : x));
+    setForm((f) => ({ ...f, notifs }));
+    setSaved((s) => ({ ...s, notifs }));
+  };
+
   const save = () => {
     setSaved(form);
     showSavedToast();
@@ -59,7 +66,7 @@ export default function Settings() {
 
       <div
         data-testid="profile-card"
-        className="rounded-lg bg-panel px-5.5 py-6"
+        className="flex flex-col rounded-lg bg-panel px-5.5 py-6"
       >
         <h3
           data-testid="profile-card-title"
@@ -95,6 +102,15 @@ export default function Settings() {
             />
           </div>
         </div>
+
+        <GlowButton
+          testId="save-changes-btn"
+          disabled={!dirty}
+          onClick={save}
+          className="mt-6 self-start"
+        >
+          Save changes
+        </GlowButton>
       </div>
 
       <div
@@ -122,26 +138,12 @@ export default function Settings() {
               <Toggle
                 testId={`notification-toggle-${n.key}`}
                 on={form.notifs[i]}
-                onChange={(v) =>
-                  set(
-                    "notifs",
-                    form.notifs.map((x, j) => (j === i ? v : x)),
-                  )
-                }
+                onChange={(v) => setNotif(i, v)}
               />
             </div>
           ))}
         </div>
       </div>
-
-      <GlowButton
-        testId="save-changes-btn"
-        disabled={!dirty}
-        onClick={save}
-        className="self-start"
-      >
-        Save changes
-      </GlowButton>
     </Page>
   );
 }
