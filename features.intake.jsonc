@@ -1,8 +1,7 @@
 {
   "features": [
     {
-      "id": "f1",
-      "category": "feature",
+      "id": "metric-alerts",
       "title": "Add metric alerts with an activity feed",
       "ticket": "The app needs to tell people when a metric crosses a threshold. Build an Alerts feature in two parts. Add a card titled 'Alert rules' to the Settings screen, below the Notifications card, styled like the other cards on that screen. At the top of the card, put a rule builder on a single horizontal row with, left to right: a 'Metric' dropdown, a 'Condition' dropdown, a 'Threshold' text input, and an 'Add rule' button. The Metric options are MRR, Revenue, Churn rate, Conversion rate, Active rate. The Condition options are 'rises above', 'falls below', 'changes by more than'. Keep 'Add rule' disabled while the Threshold input is empty. Adding a rule clears the Threshold input but leaves both dropdowns on their current selection. Below the builder, list the saved rules. Each row shows the rule as a sentence built from its three parts (for example 'MRR falls below 60'), a switch that enables or disables that rule, and an options control that opens a menu with Edit and Delete. The options control must be invisible at rest and only appear when its row is hovered or receives keyboard focus. Delete removes the rule from the list. Edit replaces the row with Metric, Condition and Threshold fields prefilled with that rule's values, plus a 'Cancel' and a 'Save' button; Save applies the new values to the rule and Cancel restores the row unchanged. Seed the list with exactly two rules: 'MRR falls below 60' enabled, and 'Churn rate rises above 2.5' disabled. When the user deletes every rule, replace the list with an empty-state message. Alert rules apply immediately and are not part of the Settings 'Save changes' form. Next, add a bell control to the sidebar header, positioned to the left of the existing collapse control. The bell carries a badge showing how many activity entries are unread, positioned at the bell's top-right corner. Hide the bell entirely while the sidebar is collapsed. Clicking the bell opens a drawer anchored to the right edge of the viewport. The drawer contains a title 'Activity', a close control, a line showing the unread count, and a 'Mark all as read' action that is disabled when nothing is unread. Group entries under day headings. Unread entries show a dot indicator; read entries do not. 'Mark all as read' clears every dot, leaves the drawer open, and removes the bell's badge. The drawer closes on its close control and on the Escape key. Seed the feed with six entries spread across three day groups titled 'Today', 'Yesterday' and 'Apr 8', with the first three entries unread. This feed is static sample data: creating an alert rule must not add an entry to it. When the feed has no entries, the drawer shows an empty-state message instead of the list and the bell renders no badge. Match the app's existing dark styling: panel surfaces, the accent color for interactive and active elements, and the app's standard 300ms transition timing.",
       "acceptanceCriteria": [
@@ -25,9 +24,9 @@
         "Each alert rule row contains a switch that changes that rule between enabled and disabled when clicked.",
         "An enabled alert rule's switch uses the app's accent color.",
         "A disabled alert rule's switch is visible and its color differs from an enabled alert rule's switch.",
-        "Each alert rule row's options control is present in the DOM with a computed opacity of 0 when the row is neither hovered nor focused.",
-        "Each alert rule row's options control has a computed opacity of 1 while the row is hovered.",
-        "Each alert rule row's options control has a computed opacity of 1 while it has keyboard focus.",
+        "An alert rule row shows no options control until that row is hovered or focused.",
+        "Hovering an alert rule row reveals its options control at the right-hand end of the row.",
+        "Giving an alert rule row's options control keyboard focus reveals it, just as hovering the row does.",
         "Clicking an alert rule row's options control opens a menu containing an Edit option and a Delete option.",
         "Clicking an alert rule row's Delete option removes that row from the alert rules list.",
         "Clicking an alert rule row's Edit option replaces that row with a Metric dropdown, a Condition dropdown, a Threshold input, a 'Cancel' button and a 'Save' button.",
@@ -41,8 +40,8 @@
         "The sidebar header renders a bell control while the sidebar is expanded.",
         "The bell control is positioned to the left of the sidebar's collapse control.",
         "The bell control displays a badge reading '3' when three activity entries are unread.",
-        "The centre of the bell's unread badge is above and to the right of the centre of the bell control.",
-        "The bell control is visible while the sidebar is expanded and is not present in the DOM after the sidebar is collapsed.",
+        "The unread badge sits at the top-right corner of the bell control, overlapping its edge.",
+        "The bell control is visible in the sidebar header while the sidebar is expanded, and is not shown at all once the sidebar is collapsed.",
         "Clicking the bell control opens the activity drawer.",
         "The activity drawer's right edge is flush with the right edge of the viewport.",
         "The activity drawer contains a title reading 'Activity'.",
@@ -55,7 +54,7 @@
         "Clicking 'Mark all as read' removes every dot indicator from the activity drawer.",
         "The activity drawer is still open after 'Mark all as read' is clicked.",
         "After 'Mark all as read' is clicked, the 'Mark all as read' control is still present and is disabled.",
-        "After every entry has been marked read, the bell control is still visible and its unread badge is not present in the DOM.",
+        "After every entry has been marked read, the bell control is still visible and shows no badge.",
         "Clicking the activity drawer's close control closes the drawer.",
         "Pressing the Escape key while the activity drawer is open closes the drawer.",
         "The number of entries in the activity drawer is unchanged after an alert rule is added.",
