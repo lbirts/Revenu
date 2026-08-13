@@ -114,8 +114,9 @@
         {
           "name": "breakdown-scrolled",
           "setup": [
-            { "waitForSelector": "[data-testid='page-title']" },
-            { "scrollTo": { "y": 800 } },
+            { "waitForSelector": "[data-testid='breakdown-head']" },
+            { "scrollTo": { "selector": "[data-testid='breakdown-row-dec']" } },
+            { "waitMs": 400 },
           ],
         },
         {
@@ -154,8 +155,9 @@
           "name": "scrolled-400",
           "setup": [
             { "waitForSelector": "[data-testid='reports-table-head']" },
-            { "scrollTo": { "y": 400 } },
-            { "waitMs": 300 },
+            { "scrollTo": { "selector": "[data-testid='report-row-rpt-016']" } },
+            { "waitForSelector": "[data-testid='scroll-top']" },
+            { "waitMs": 400 },
           ],
         },
       ],
